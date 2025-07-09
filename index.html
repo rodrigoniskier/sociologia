@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sociologia da Teologia Reformada - Aplicativo Educacional</title>
+    <style>
+        /* Reset e Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8fafc;
+        }
+
+        /* Variáveis CSS */
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --light: #f1f5f9;
+            --dark: #1e293b;
+            --border: #e2e8f0;
+            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 0.5rem;
+            --transition: all 0.3s ease;
+        }
+
+        /* Utilitários */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 0.875rem;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--light);
+            transform: translateY(-1px);
+        }
+
+        .card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-2px);
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .badge-success {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .badge-danger {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .progress {
+            width: 100%;
+            height: 0.5rem;
+            background: var(--light);
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.5s ease;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Sections */
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.125rem;
+            color: var(--secondary);
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Grid */
+        .grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        /* Flashcard */
+        .flashcard {
+            perspective: 1000px;
+            height: 400px;
+            margin-bottom: 2rem;
+        }
+
+        .flashcard-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .flashcard.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front,
+        .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: var(--border-radius);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .flashcard-front {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .flashcard-back {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        /* Quiz */
+        .quiz-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        .quiz-question {
+            background: white;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .quiz-options {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .quiz-option {
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+            background: #f8fafc;
+        }
+
+        .quiz-option.correct {
+            border-color: var(--success);
+            background: #dcfce7;
+        }
+
+        .quiz-option.incorrect {
+            border-color: var(--danger);
+            background: #fee2e2;
+        }
+
+        /* Content Viewer */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .sidebar {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 1.5rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+
+        .content-main {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .toc-item {
+            padding: 0.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-bottom: 0.5rem;
+        }
+
+        .toc-item:hover,
+        .toc-item.active {
+            background: var(--light);
+            color: var(--primary);
+        }
+
+        /* Search */
+        .search-container {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: var(--border-radius);
+            background: white;
+            cursor: pointer;
+        }
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: var(--secondary);
+            font-size: 0.875rem;
+        }
+
+        /* Highlights */
+        .highlight {
+            background: #fef08a;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .animate-slide-in {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: static;
+            }
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hidden class */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Timer */
+        .timer {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+
+        .timer.warning {
+            color: var(--danger);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-section a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #374151;
+            color: #94a3b8;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    📚 Sociologia da Teologia Reformada
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#" class="nav-link active" data-section="home">Início</a></li>
+                    <li><a href="#" class="nav-link" data-section="content">Conteúdo</a></li>
+                    <li><a href="#" class="nav-link" data-section="flashcards">Flashcards</a></li>
+                    <li><a href="#" class="nav-link" data-section="quiz">Quiz</a></li>
+                    <li><a href="#" class="nav-link" data-section="about">Sobre</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Home Section -->
+        <section id="home-section" class="section-content">
+            <!-- Hero -->
+            <div class="hero">
+                <div class="container">
+                    <h1>Sociologia da <span style="color: #fbbf24;">Teologia Reformada</span></h1>
+                    <p>Uma análise interdisciplinar que explora a intersecção entre sociologia e teologia reformada, oferecendo insights sobre pobreza, preconceito, corrupção e política.</p>
+                    <div class="hero-buttons">
+                        <button class="btn btn-primary" onclick="showSection('content')">
+                            ▶️ Começar Estudos
+                        </button>
+                        <button class="btn btn-secondary" onclick="showSection('content')">
+                            📖 Ver Conteúdo
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="section">
+                <div class="container">
+                    <div class="stats">
+                        <div class="card stat-card">
+                            <div class="stat-number">10+</div>
+                            <div class="stat-label">Capítulos</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Flashcards</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-number">100+</div>
+                            <div class="stat-label">Questões Quiz</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-number">30+</div>
+                            <div class="stat-label">Conceitos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="section" style="background: white;">
+                <div class="container">
+                    <h2 class="section-title">Recursos Educacionais</h2>
+                    <p class="section-subtitle">Uma plataforma completa para o estudo da sociologia da teologia reformada</p>
+                    
+                    <div class="grid grid-3">
+                        <div class="card" onclick="showSection('content')">
+                            <div class="card-body">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">📚</div>
+                                <h3 style="margin-bottom: 1rem;">Conteúdo Acadêmico</h3>
+                                <p>Textos aprofundados sobre sociologia e teologia reformada com referências acadêmicas.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card" onclick="showSection('flashcards')">
+                            <div class="card-body">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">🧠</div>
+                                <h3 style="margin-bottom: 1rem;">Flashcards Interativos</h3>
+                                <p>Sistema de repetição espaçada para memorização eficiente de conceitos-chave.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="card" onclick="showSection('quiz')">
+                            <div class="card-body">
+                                <div style="font-size: 2rem; margin-bottom: 1rem;">🎯</div>
+                                <h3 style="margin-bottom: 1rem;">Quizzes Gamificados</h3>
+                                <p>Testes interativos com sistema de pontuação e progresso visual.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section id="content-section" class="section-content hidden">
+            <div class="section">
+                <div class="container">
+                    <h2 class="section-title">Conteúdo Acadêmico</h2>
+                    <p class="section-subtitle">Material completo sobre Sociologia da Teologia Reformada</p>
+                    
+                    <!-- Search and Filters -->
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="🔍 Buscar no conteúdo..." id="content-search">
+                    </div>
+                    
+                    <div class="filters">
+                        <select class="filter-select" id="difficulty-filter">
+                            <option value="">Todas as dificuldades</option>
+                            <option value="basico">Básico</option>
+                            <option value="intermediario">Intermediário</option>
+                            <option value="avancado">Avançado</option>
+                        </select>
+                        <button class="btn btn-secondary">📄 Download PDF</button>
+                    </div>
+                    
+                    <!-- Content Layout -->
+                    <div class="content-layout">
+                        <!-- Sidebar -->
+                        <div class="sidebar">
+                            <h3 style="margin-bottom: 1rem;">📋 Sumário</h3>
+                            <div id="table-of-contents">
+                                <div class="toc-item active" data-content="fundamentos">
+                                    <strong>1. Fundamentos da Sociologia</strong>
+                                    <div style="font-size: 0.875rem; color: var(--secondary);">15 min • 2 seções</div>
+                                </div>
+                                <div class="toc-item" data-content="problemas">
+                                    <strong>2. Problemas Sociais</strong>
+                                    <div style="font-size: 0.875rem; color: var(--secondary);">25 min • 4 seções</div>
+                                </div>
+                                <div class="toc-item" data-content="instituicoes">
+                                    <strong>3. Instituições Sociais</strong>
+                                    <div style="font-size: 0.875rem; color: var(--secondary);">20 min • 3 seções</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Main Content -->
+                        <div class="content-main">
+                            <div id="content-display">
+                                <!-- Content will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flashcards Section -->
+        <section id="flashcards-section" class="section-content hidden">
+            <div class="section">
+                <div class="container">
+                    <h2 class="section-title">Flashcards Interativos</h2>
+                    <p class="section-subtitle">Sistema de repetição espaçada para memorização eficiente</p>
+                    
+                    <!-- Filters -->
+                    <div class="filters">
+                        <select class="filter-select" id="flashcard-difficulty">
+                            <option value="">Todas as dificuldades</option>
+                            <option value="basico">Básico</option>
+                            <option value="intermediario">Intermediário</option>
+                            <option value="avancado">Avançado</option>
+                        </select>
+                        <select class="filter-select" id="flashcard-category">
+                            <option value="">Todas as categorias</option>
+                            <option value="fundamentos">Fundamentos</option>
+                            <option value="teologia">Teologia Reformada</option>
+                            <option value="problemas">Problemas Sociais</option>
+                        </select>
+                        <button class="btn btn-secondary" onclick="resetFlashcards()">🔄 Reiniciar</button>
+                    </div>
+                    
+                    <!-- Progress -->
+                    <div class="card" style="margin-bottom: 2rem;">
+                        <div class="card-body">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <span>Progresso: <span id="flashcard-progress">0 de 10</span> estudados</span>
+                                <span id="flashcard-percentage">0%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar" id="flashcard-progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Flashcard -->
+                    <div class="flashcard" id="flashcard" onclick="flipCard()">
+                        <div class="flashcard-inner" id="flashcard-inner">
+                            <div class="flashcard-front">
+                                <div style="margin-bottom: 1rem;">
+                                    <span class="badge badge-success" id="flashcard-category-badge">Fundamentos</span>
+                                    <span class="badge badge-warning" id="flashcard-difficulty-badge">Básico</span>
+                                </div>
+                                <h3 id="flashcard-question" style="margin-bottom: 2rem;">O que é Sociologia?</h3>
+                                <div style="margin-bottom: 1rem;">
+                                    <span class="badge" style="background: #e0e7ff; color: #3730a3;" id="flashcard-tags">conceitos</span>
+                                </div>
+                                <p style="opacity: 0.8;">Clique para ver a resposta</p>
+                            </div>
+                            <div class="flashcard-back">
+                                <div style="margin-bottom: 1rem;">
+                                    <span class="badge" style="background: rgba(255,255,255,0.2); color: white;">✅ Resposta</span>
+                                </div>
+                                <p id="flashcard-answer">A Sociologia é a ciência que estuda a sociedade em sua totalidade, buscando compreender as interações humanas, as estruturas sociais, os processos de mudança e as formas de organização coletiva.</p>
+                                <p style="opacity: 0.8; margin-top: 2rem;">Clique para voltar à pergunta</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
+                        <button class="btn btn-secondary" onclick="previousCard()">⬅️ Anterior</button>
+                        <span id="flashcard-counter">1 de 10</span>
+                        <button class="btn btn-secondary" onclick="nextCard()">Próximo ➡️</button>
+                    </div>
+                    
+                    <!-- Stats -->
+                    <div class="stats" style="margin-top: 2rem;">
+                        <div class="card stat-card">
+                            <div class="stat-number" id="total-cards">10</div>
+                            <div class="stat-label">Total de Cards</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-number" id="studied-cards">0</div>
+                            <div class="stat-label">Estudados</div>
+                        </div>
+                        <div class="card stat-card">
+                            <div class="stat-number" id="progress-percentage">0%</div>
+                            <div class="stat-label">Progresso</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz Section -->
+        <section id="quiz-section" class="section-content hidden">
+            <div class="section">
+                <div class="container">
+                    <!-- Quiz Start Screen -->
+                    <div id="quiz-start" class="quiz-container">
+                        <div style="text-align: center;">
+                            <div style="font-size: 4rem; margin-bottom: 2rem;">🏆</div>
+                            <h2 class="section-title">Quiz de Sociologia da Teologia Reformada</h2>
+                            <p class="section-subtitle">Teste seus conhecimentos sobre sociologia e teologia reformada. Você terá 30 segundos para responder cada questão.</p>
+                            
+                            <div class="stats" style="margin-bottom: 3rem;">
+                                <div class="card stat-card">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                                    <div class="stat-number">10</div>
+                                    <div class="stat-label">Questões</div>
+                                </div>
+                                <div class="card stat-card">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏱️</div>
+                                    <div class="stat-number">30s</div>
+                                    <div class="stat-label">Por Questão</div>
+                                </div>
+                                <div class="card stat-card">
+                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">⭐</div>
+                                    <div class="stat-number">100</div>
+                                    <div class="stat-label">Pontos Máximos</div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-primary" onclick="startQuiz()" style="font-size: 1.125rem; padding: 1rem 2rem;">
+                                ▶️ Iniciar Quiz
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quiz Game -->
+                    <div id="quiz-game" class="quiz-container hidden">
+                        <!-- Quiz Header -->
+                        <div class="quiz-header">
+                            <div>
+                                <h3>Quiz</h3>
+                                <p>Questão <span id="current-question">1</span> de <span id="total-questions">10</span></p>
+                            </div>
+                            <div style="display: flex; gap: 2rem; align-items: center;">
+                                <div class="timer" id="timer">
+                                    ⏱️ <span id="time-left">30</span>s
+                                </div>
+                                <div>
+                                    ⭐ <span id="current-score">0</span> pts
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Progress -->
+                        <div class="progress" style="margin-bottom: 2rem;">
+                            <div class="progress-bar" id="quiz-progress-bar" style="width: 10%"></div>
+                        </div>
+                        
+                        <!-- Question -->
+                        <div class="quiz-question">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                                <span class="badge badge-success" id="question-category">Fundamentos da Sociologia</span>
+                                <span class="badge badge-warning" id="question-difficulty">Básico • 10 pts</span>
+                            </div>
+                            <h3 id="question-text">Quem é considerado o fundador da Sociologia?</h3>
+                            
+                            <div class="quiz-options" id="quiz-options">
+                                <!-- Options will be loaded here -->
+                            </div>
+                        </div>
+                        
+                        <!-- Explanation -->
+                        <div id="explanation-card" class="card hidden" style="border-left: 4px solid var(--primary);">
+                            <div class="card-body">
+                                <h4 style="color: var(--primary); margin-bottom: 1rem;">💡 Explicação:</h4>
+                                <p id="explanation-text"></p>
+                            </div>
+                        </div>
+                        
+                        <!-- Next Button -->
+                        <div id="next-button-container" class="hidden" style="text-align: center; margin-top: 2rem;">
+                            <button class="btn btn-primary" onclick="nextQuestion()">Próxima Questão</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quiz Results -->
+                    <div id="quiz-results" class="quiz-container hidden">
+                        <div style="text-align: center;">
+                            <div id="result-icon" style="font-size: 4rem; margin-bottom: 2rem;">🏆</div>
+                            <h2 class="section-title">Quiz Concluído!</h2>
+                            <p id="result-message" style="font-size: 1.25rem; color: var(--primary); font-weight: 600; margin-bottom: 3rem;">Excelente</p>
+                            
+                            <div class="stats" style="margin-bottom: 3rem;">
+                                <div class="card stat-card">
+                                    <div class="stat-number" id="final-score">0</div>
+                                    <div class="stat-label">Pontos Obtidos</div>
+                                </div>
+                                <div class="card stat-card">
+                                    <div class="stat-number" id="final-percentage">0%</div>
+                                    <div class="stat-label">Aproveitamento</div>
+                                </div>
+                                <div class="card stat-card">
+                                    <div class="stat-number" id="correct-answers">0/10</div>
+                                    <div class="stat-label">Acertos</div>
+                                </div>
+                            </div>
+                            
+                            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                                <button class="btn btn-secondary" onclick="resetQuiz()">🔄 Tentar Novamente</button>
+                                <button class="btn btn-primary" onclick="showSection('flashcards')">📚 Estudar Flashcards</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about-section" class="section-content hidden">
+            <div class="section">
+                <div class="container">
+                    <div style="max-width: 800px; margin: 0 auto;">
+                        <h2 class="section-title">Sobre o Projeto</h2>
+                        
+                        <div class="card">
+                            <div class="card-body">
+                                <p style="font-size: 1.125rem; margin-bottom: 2rem;">
+                                    Este aplicativo educacional foi desenvolvido para explorar a intersecção entre sociologia e teologia reformada, 
+                                    oferecendo uma análise interdisciplinar de questões sociais fundamentais.
+                                </p>
+                                
+                                <h3 style="margin-bottom: 1rem;">📚 Metodologia</h3>
+                                <p style="margin-bottom: 2rem;">
+                                    O conteúdo foi elaborado com base em pesquisa acadêmica rigorosa, integrando perspectivas sociológicas 
+                                    clássicas com os princípios da teologia reformada. Cada seção inclui referências bibliográficas e 
+                                    análises críticas dos temas abordados.
+                                </p>
+                                
+                                <h3 style="margin-bottom: 1rem;">🎮 Recursos Interativos</h3>
+                                <p style="margin-bottom: 2rem;">
+                                    A plataforma oferece múltiplas formas de engajamento com o conteúdo, incluindo flashcards para 
+                                    memorização, quizzes gamificados para avaliação e um sistema de busca avançado para navegação eficiente.
+                                </p>
+                                
+                                <h3 style="margin-bottom: 1rem;">🤖 Desenvolvido por</h3>
+                                <p>
+                                    <strong>Rodrigo Niskier/strong> - ChatGPT e Manus.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>📚 Sociologia da Teologia Reformada</h3>
+                    <p>Uma plataforma educacional dedicada ao estudo interdisciplinar da sociologia e teologia reformada.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Recursos</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#" onclick="showSection('content')">Conteúdo</a></li>
+                        <li><a href="#" onclick="showSection('flashcards')">Flashcards</a></li>
+                        <li><a href="#" onclick="showSection('quiz')">Quiz</a></li>
+                        <li><a href="#">Glossário</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Sobre</h3>
+                    <ul style="list-style: none;">
+                        <li><a href="#" onclick="showSection('about')">Metodologia</a></li>
+                        <li><a href="#">Referências</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Suporte</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Manus AI. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Data
+        const flashcardsData = [
+            {
+                id: 1,
+                category: "Fundamentos",
+                question: "O que é Sociologia?",
+                answer: "A Sociologia é a ciência que estuda a sociedade em sua totalidade, buscando compreender as interações humanas, as estruturas sociais, os processos de mudança e as formas de organização coletiva.",
+                difficulty: "basico",
+                tags: ["conceitos", "definição"]
+            },
+            {
+                id: 2,
+                category: "Teologia Reformada",
+                question: "O que significa 'Depravação Total' na Teologia Reformada?",
+                answer: "A doutrina da depravação total ensina que o pecado corrompeu todas as facetas do ser humano – intelecto, emoções, vontade e corpo. Não significa que o ser humano é tão mau quanto poderia ser, mas que todas as áreas foram afetadas pelo pecado.",
+                difficulty: "intermediario",
+                tags: ["doutrina", "pecado"]
+            },
+            {
+                id: 3,
+                category: "Problemas Sociais",
+                question: "Como a Teologia Reformada aborda a questão da pobreza?",
+                answer: "A Teologia Reformada vê a pobreza como consequência da Queda e do pecado, mas enfatiza a responsabilidade cristã de cuidar dos pobres através da mordomia, caridade e transformação de estruturas injustas.",
+                difficulty: "intermediario",
+                tags: ["pobreza", "justiça social"]
+            },
+            {
+                id: 4,
+                category: "Fundamentos",
+                question: "Quais são as principais instituições sociais?",
+                answer: "As principais instituições sociais são: Família (socialização primária), Educação (transmissão de conhecimento), Religião (sistemas de crenças), Economia (produção e distribuição) e Política/Estado (ordem e poder).",
+                difficulty: "basico",
+                tags: ["instituições", "sociedade"]
+            },
+            {
+                id: 5,
+                category: "Fundamentos",
+                question: "Qual a diferença entre cooperação e competição como processos sociais?",
+                answer: "Cooperação é a ação conjunta para alcançar objetivos comuns, promovendo união. Competição é a disputa por recursos escassos, onde o sucesso de um implica na desvantagem de outro.",
+                difficulty: "intermediario",
+                tags: ["processos", "interação"]
+            },
+            {
+                id: 6,
+                category: "Fundamentos",
+                question: "O que são fatores de mudança social?",
+                answer: "São elementos que impulsionam transformações na sociedade: demográficos (população), culturais (valores), tecnológicos (inovações), econômicos (crises), políticos (reformas) e ambientais (clima).",
+                difficulty: "avancado",
+                tags: ["mudança", "fatores"]
+            },
+            {
+                id: 7,
+                category: "Fundamentos",
+                question: "O que é estratificação social?",
+                answer: "É a forma como as sociedades são organizadas em camadas hierárquicas baseadas em critérios como riqueza, poder, prestígio e educação, resultando em desigualdades no acesso a recursos.",
+                difficulty: "basico",
+                tags: ["estratificação", "desigualdade"]
+            },
+            {
+                id: 8,
+                category: "Teologia Reformada",
+                question: "Como a cosmovisão reformada vê o engajamento político?",
+                answer: "A cosmovisão reformada defende que Deus é soberano sobre todas as esferas, incluindo a política. Os cristãos devem se engajar ativamente na política para promover justiça e bem comum.",
+                difficulty: "avancado",
+                tags: ["política", "engajamento"]
+            },
+            {
+                id: 9,
+                category: "Fundamentos",
+                question: "Qual a diferença entre grupos primários e secundários?",
+                answer: "Grupos primários têm relações íntimas e pessoais (família, amigos). Grupos secundários têm relações formais e instrumentais focadas em objetivos específicos (empresas, partidos).",
+                difficulty: "intermediario",
+                tags: ["grupos", "relações"]
+            },
+            {
+                id: 10,
+                category: "Problemas Sociais",
+                question: "Como a Teologia Reformada aborda a corrupção?",
+                answer: "A corrupção é vista como manifestação da depravação humana. A resposta inclui transformação de corações, reforma de estruturas e engajamento ativo na promoção da integridade e transparência.",
+                difficulty: "avancado",
+                tags: ["corrupção", "ética"]
+            }
+        ];
+
+        const quizData = [
+            {
+                id: 1,
+                category: "Fundamentos da Sociologia",
+                question: "Quem é considerado o fundador da Sociologia?",
+                options: ["Karl Marx", "Auguste Comte", "Max Weber", "Émile Durkheim"],
+                correct: 1,
+                explanation: "Auguste Comte é considerado o fundador da Sociologia, tendo cunhado o termo e proposto o positivismo como método de estudo da sociedade.",
+                difficulty: "Básico",
+                points: 10
+            },
+            {
+                id: 2,
+                category: "Teologia Reformada",
+                question: "Qual dos seguintes NÃO é um dos cinco pontos do Calvinismo?",
+                options: ["Depravação Total", "Eleição Incondicional", "Livre Arbítrio", "Perseverança dos Santos"],
+                correct: 2,
+                explanation: "O Livre Arbítrio não é um dos cinco pontos do Calvinismo. Os cinco pontos são: Depravação Total, Eleição Incondicional, Expiação Limitada, Graça Irresistível e Perseverança dos Santos.",
+                difficulty: "Intermediário",
+                points: 15
+            },
+            {
+                id: 3,
+                category: "Problemas Sociais",
+                question: "Segundo a perspectiva reformada, qual é a causa fundamental da pobreza?",
+                options: ["Falta de educação", "Sistemas econômicos injustos", "O pecado e a Queda", "Falta de oportunidades"],
+                correct: 2,
+                explanation: "Na perspectiva reformada, a pobreza é vista como consequência da Queda e do pecado humano, embora isso não exclua a responsabilidade de combater suas manifestações estruturais.",
+                difficulty: "Intermediário",
+                points: 15
+            },
+            {
+                id: 4,
+                category: "Fundamentos da Sociologia",
+                question: "Qual instituição social é responsável pela socialização primária?",
+                options: ["Escola", "Igreja", "Família", "Estado"],
+                correct: 2,
+                explanation: "A família é a instituição responsável pela socialização primária, moldando os valores e comportamentos básicos dos indivíduos desde a infância.",
+                difficulty: "Básico",
+                points: 10
+            },
+            {
+                id: 5,
+                category: "Fundamentos da Sociologia",
+                question: "Qual processo social envolve a adaptação mútua para permitir coexistência?",
+                options: ["Cooperação", "Competição", "Acomodação", "Conflito"],
+                correct: 2,
+                explanation: "A acomodação é o processo pelo qual indivíduos ou grupos ajustam suas relações para reduzir o conflito e encontrar um modus vivendi.",
+                difficulty: "Intermediário",
+                points: 15
+            },
+            {
+                id: 6,
+                category: "Fundamentos da Sociologia",
+                question: "O que caracteriza um sistema de castas?",
+                options: ["Alta mobilidade social", "Sistema fechado e hereditário", "Baseado apenas na riqueza", "Temporário e flexível"],
+                correct: 1,
+                explanation: "O sistema de castas é caracterizado por ser fechado, hereditário, baseado no nascimento e com pouca ou nenhuma mobilidade social.",
+                difficulty: "Básico",
+                points: 10
+            },
+            {
+                id: 7,
+                category: "Teologia Reformada",
+                question: "Qual teórico desenvolveu a teoria da 'Ética Protestante e o Espírito do Capitalismo'?",
+                options: ["Karl Marx", "Max Weber", "Émile Durkheim", "Auguste Comte"],
+                correct: 1,
+                explanation: "Max Weber desenvolveu esta teoria, analisando como a ética protestante (especialmente calvinista) contribuiu para o desenvolvimento do capitalismo.",
+                difficulty: "Intermediário",
+                points: 15
+            },
+            {
+                id: 8,
+                category: "Fundamentos da Sociologia",
+                question: "Qual é a principal diferença entre grupo social e agregado social?",
+                options: ["O tamanho do grupo", "A localização geográfica", "A intensidade da interação", "A idade dos membros"],
+                correct: 2,
+                explanation: "A principal diferença está na intensidade da interação: grupos sociais têm interação contínua e significativa, enquanto agregados sociais têm interação mínima e superficial.",
+                difficulty: "Intermediário",
+                points: 15
+            },
+            {
+                id: 9,
+                category: "Teologia Reformada",
+                question: "Como a cosmovisão reformada vê o engajamento político dos cristãos?",
+                options: ["Deve ser evitado completamente", "Apenas em questões religiosas", "Engajamento ativo em todas as esferas", "Somente através da igreja"],
+                correct: 2,
+                explanation: "A cosmovisão reformada defende que Deus é soberano sobre todas as esferas da vida, incluindo a política, e os cristãos devem se engajar ativamente para promover justiça.",
+                difficulty: "Avançado",
+                points: 20
+            },
+            {
+                id: 10,
+                category: "Problemas Sociais",
+                question: "Qual é a abordagem reformada para combater a corrupção?",
+                options: ["Apenas punição legal", "Somente educação moral", "Transformação de corações e estruturas", "Ignorar o problema"],
+                correct: 2,
+                explanation: "A abordagem reformada para a corrupção inclui tanto a transformação de corações (arrependimento individual) quanto a reforma de estruturas sociais que permitem a corrupção.",
+                difficulty: "Avançado",
+                points: 20
+            }
+        ];
+
+        const contentData = {
+            fundamentos: {
+                title: "Fundamentos da Sociologia",
+                difficulty: "Básico",
+                readTime: "15 min",
+                content: `
+                    <h3>Significado e História da Sociologia</h3>
+                    <p>A <span class="highlight">Sociologia</span> pode ser definida como a ciência que estuda a sociedade em sua totalidade, buscando compreender as interações humanas, as <span class="highlight">estruturas sociais</span>, os processos de mudança e as formas de organização coletiva. Ela se debruça sobre questões como a formação de grupos, a estratificação social, o poder, a cultura, as normas e os valores que orientam o comportamento humano.</p>
+                    
+                    <p>Historicamente, o surgimento da Sociologia está intrinsecamente ligado ao contexto de crise e reestruturação social do século XIX. Pensadores como <span class="highlight">Auguste Comte</span>, <span class="highlight">Émile Durkheim</span>, <span class="highlight">Karl Marx</span> e <span class="highlight">Max Weber</span> são considerados os pais fundadores da disciplina, cada um contribuindo com perspectivas teóricas e metodológicas distintas que moldaram o campo.</p>
+                    
+                    <h3>Comparação com Outras Ciências Sociais</h3>
+                    <p>A Sociologia compartilha fronteiras e dialoga com diversas outras ciências sociais, mas se distingue delas por seu foco e abordagem:</p>
+                    
+                    <p><strong>Antropologia:</strong> Enquanto a Antropologia tradicionalmente se concentra no estudo das culturas humanas, especialmente as não ocidentais, e na diversidade cultural, a Sociologia tende a analisar as sociedades complexas e as estruturas sociais modernas.</p>
+                    
+                    <p><strong>Ciência Política:</strong> A Ciência Política estuda o poder, o Estado, os sistemas de governo e as relações políticas. A Sociologia, por sua vez, analisa as bases sociais do poder, a participação política, os movimentos sociais e a influência das estruturas sociais nas decisões políticas.</p>
+                    
+                    <p><strong>Economia:</strong> A Economia se dedica ao estudo da produção, distribuição e consumo de bens e serviços. A Sociologia econômica investiga as relações sociais que permeiam as atividades econômicas, a estratificação social baseada na riqueza, o impacto das políticas econômicas na sociedade e a cultura do consumo.</p>
+                `,
+                keyTerms: ["Sociologia", "estruturas sociais", "estratificação social", "Auguste Comte", "Max Weber"]
+            },
+            problemas: {
+                title: "A Teologia Reformada e os Problemas Sociais",
+                difficulty: "Intermediário",
+                readTime: "25 min",
+                content: `
+                    <h3>Pobreza</h3>
+                    <p>A <span class="highlight">pobreza</span> é um fenômeno complexo, com dimensões econômicas, sociais e espirituais. A Teologia Reformada, embora por vezes associada à ética do trabalho e ao desenvolvimento econômico (como analisado por <span class="highlight">Max Weber</span> em "A Ética Protestante e o Espírito do Capitalismo"), não ignora a realidade da pobreza, mas a aborda a partir de seus próprios pressupostos teológicos e sociológicos.</p>
+                    
+                    <p>Para a Teologia Reformada, a pobreza, assim como outras formas de injustiça e sofrimento, é vista como uma consequência da <span class="highlight">Queda</span> e do pecado humano. O pecado distorceu as relações humanas, a criação e a própria economia, levando à ganância, exploração e desigualdade.</p>
+                    
+                    <p>A <span class="highlight">soberania de Deus</span> se estende sobre todas as coisas, inclusive sobre a riqueza e a pobreza. A riqueza não é um sinal automático de virtude, nem a pobreza de maldição. No entanto, a Teologia Reformada enfatiza a <span class="highlight">mordomia cristã</span>, ou seja, a responsabilidade de usar os recursos (bens, talentos, tempo) para a glória de Deus e o bem do próximo.</p>
+                    
+                    <h3>Preconceito e Educação</h3>
+                    <p>O <span class="highlight">preconceito</span>, em suas diversas manifestações (racismo, xenofobia, discriminação de gênero, social, religiosa, etc.), é uma chaga social que desafia os princípios de justiça e dignidade humana. A Teologia Reformada, com sua ênfase na <span class="highlight">imago Dei</span> (imagem de Deus) em cada ser humano e na depravação total que afeta todas as esferas da vida, oferece uma base teológica para combater o preconceito e promover uma educação que valorize a diversidade e a inclusão.</p>
+                    
+                    <p>A doutrina reformada ensina que todos os seres humanos, independentemente de raça, etnia, gênero, status social ou qualquer outra característica, são criados à <span class="highlight">imagem e semelhança de Deus</span> (Gênesis 1:27). Isso confere a cada indivíduo uma dignidade intrínseca e um valor inestimável. O preconceito, ao desumanizar ou inferiorizar o outro, é uma afronta direta à imago Dei e, portanto, um pecado contra Deus e contra o próximo.</p>
+                    
+                    <h3>Corrupção</h3>
+                    <p>A <span class="highlight">corrupção</span> é vista como manifestação da depravação humana. A resposta inclui transformação de corações, reforma de estruturas e engajamento ativo na promoção da integridade e transparência.</p>
+                    
+                    <h3>Política</h3>
+                    <p>A relação entre Teologia Reformada e <span class="highlight">política</span> é complexa e tem sido objeto de debate ao longo dos séculos. A cosmovisão reformada defende que Deus é soberano sobre todas as esferas da vida, incluindo a política, e os cristãos devem se engajar ativamente para promover justiça e bem comum.</p>
+                `,
+                keyTerms: ["pobreza", "justiça social", "mordomia", "imago Dei", "corrupção", "política", "soberania de Deus"]
+            },
+            instituicoes: {
+                title: "Instituições e Processos Sociais",
+                difficulty: "Intermediário",
+                readTime: "20 min",
+                content: `
+                    <h3>As Instituições Sociais</h3>
+                    <p>As <span class="highlight">instituições sociais</span> são estruturas organizadas de padrões de comportamento e crenças que regulam a vida social e satisfazem as necessidades básicas da sociedade. Elas são fundamentais para a manutenção da ordem social e para a transmissão da cultura.</p>
+                    
+                    <p>As principais instituições sociais incluem:</p>
+                    
+                    <p><strong>Família:</strong> A instituição primária, responsável pela <span class="highlight">socialização</span> inicial, reprodução e cuidado dos membros.</p>
+                    
+                    <p><strong>Educação:</strong> Transmite conhecimentos, valores e habilidades, preparando os indivíduos para a vida em sociedade.</p>
+                    
+                    <p><strong>Religião:</strong> Oferece sistemas de crenças, rituais e moralidade, fornecendo sentido e coesão social.</p>
+                    
+                    <p><strong>Economia:</strong> Organiza a produção e distribuição de bens e serviços.</p>
+                    
+                    <p><strong>Política/Estado:</strong> Estabelece e mantém a ordem, regula as relações sociais e exerce o poder.</p>
+                    
+                    <h3>Os Processos Sociais Básicos</h3>
+                    <p>Os <span class="highlight">processos sociais</span> são as formas dinâmicas e recorrentes pelas quais os indivíduos e grupos interagem uns com os outros, estabelecendo relações e moldando a estrutura social.</p>
+                    
+                    <p><strong>Processos Associativos:</strong></p>
+                    
+                    <p><strong>Cooperação:</strong> É a ação conjunta de indivíduos ou grupos para alcançar um objetivo comum. A <span class="highlight">cooperação</span> implica em trabalho em equipe, apoio mútuo e a busca por benefícios compartilhados.</p>
+                    
+                    <p><strong>Acomodação:</strong> Refere-se ao processo pelo qual indivíduos ou grupos ajustam suas relações para reduzir o conflito e encontrar um modus vivendi, mesmo que as diferenças subjacentes persistam.</p>
+                    
+                    <p><strong>Assimilação:</strong> É o processo pelo qual indivíduos ou grupos adquirem as características culturais de outro grupo social, tornando-se semelhantes e, eventualmente, integrando-se a ele.</p>
+                    
+                    <p><strong>Processos Dissociativos:</strong></p>
+                    
+                    <p><strong>Competição:</strong> É a disputa por recursos escassos, status, poder ou reconhecimento, onde o sucesso de um indivíduo ou grupo implica no fracasso ou na desvantagem de outro.</p>
+                    
+                    <p><strong>Conflito:</strong> É a forma mais intensa de processo dissociativo, caracterizada pela oposição direta e consciente entre indivíduos ou grupos que buscam atingir objetivos mutuamente exclusivos.</p>
+                `,
+                keyTerms: ["instituições sociais", "socialização", "processos sociais", "cooperação", "conflito", "ordem social"]
+            }
+        };
+
+        // State
+        let currentSection = 'home';
+        let currentFlashcard = 0;
+        let studiedCards = new Set();
+        let filteredFlashcards = [...flashcardsData];
+        let currentQuizQuestion = 0;
+        let quizScore = 0;
+        let quizAnswers = [];
+        let quizTimer = null;
+        let timeLeft = 30;
+        let quizStarted = false;
+
+        // Navigation
+        function showSection(section) {
+            // Hide all sections
+            document.querySelectorAll('.section-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Show target section
+            document.getElementById(section + '-section').classList.remove('hidden');
+            
+            // Update nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`[data-section="${section}"]`).classList.add('active');
+            
+            currentSection = section;
+            
+            // Initialize section-specific content
+            if (section === 'content') {
+                loadContent('fundamentos');
+            } else if (section === 'flashcards') {
+                updateFlashcard();
+            }
+        }
+
+        // Content Management
+        function loadContent(contentKey) {
+            const content = contentData[contentKey];
+            if (!content) return;
+            
+            document.getElementById('content-display').innerHTML = `
+                <div class="animate-fade-in">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <span class="badge badge-${content.difficulty === 'Básico' ? 'success' : content.difficulty === 'Intermediário' ? 'warning' : 'danger'}">${content.difficulty}</span>
+                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--secondary);">
+                            📄 <span>${content.readTime}</span>
+                        </div>
+                    </div>
+                    <h2 style="margin-bottom: 1rem;">${content.title}</h2>
+                    <div style="line-height: 1.8; font-size: 1.1rem;">
+                        ${content.content}
+                    </div>
+                    <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+                    <div>
+                        <h4 style="margin-bottom: 1rem;">🏷️ Termos-chave:</h4>
+                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                            ${content.keyTerms.map(term => `<span class="badge" style="background: #e0e7ff; color: #3730a3;">${term}</span>`).join('')}
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                        <button class="btn btn-secondary">⬅️ Seção Anterior</button>
+                        <span style="color: var(--secondary);">Seção ${Object.keys(contentData).indexOf(contentKey) + 1}</span>
+                        <button class="btn btn-secondary">Próxima Seção ➡️</button>
+                    </div>
+                </div>
+            `;
+            
+            // Update TOC
+            document.querySelectorAll('.toc-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            document.querySelector(`[data-content="${contentKey}"]`).classList.add('active');
+        }
+
+        // Flashcards
+        function updateFlashcard() {
+            if (filteredFlashcards.length === 0) return;
+            
+            const card = filteredFlashcards[currentFlashcard];
+            
+            document.getElementById('flashcard-category-badge').textContent = card.category;
+            document.getElementById('flashcard-difficulty-badge').textContent = card.difficulty.charAt(0).toUpperCase() + card.difficulty.slice(1);
+            document.getElementById('flashcard-question').textContent = card.question;
+            document.getElementById('flashcard-answer').textContent = card.answer;
+            document.getElementById('flashcard-tags').textContent = card.tags.join(', ');
+            
+            // Update counter
+            document.getElementById('flashcard-counter').textContent = `${currentFlashcard + 1} de ${filteredFlashcards.length}`;
+            
+            // Update progress
+            updateFlashcardProgress();
+            
+            // Reset flip state
+            document.getElementById('flashcard').classList.remove('flipped');
+        }
+
+        function flipCard() {
+            const flashcard = document.getElementById('flashcard');
+            flashcard.classList.toggle('flipped');
+            
+            if (flashcard.classList.contains('flipped')) {
+                const cardId = filteredFlashcards[currentFlashcard].id;
+                studiedCards.add(cardId);
+                updateFlashcardProgress();
+            }
+        }
+
+        function nextCard() {
+            currentFlashcard = (currentFlashcard + 1) % filteredFlashcards.length;
+            updateFlashcard();
+        }
+
+        function previousCard() {
+            currentFlashcard = (currentFlashcard - 1 + filteredFlashcards.length) % filteredFlashcards.length;
+            updateFlashcard();
+        }
+
+        function resetFlashcards() {
+            studiedCards.clear();
+            currentFlashcard = 0;
+            updateFlashcard();
+        }
+
+        function updateFlashcardProgress() {
+            const studied = studiedCards.size;
+            const total = filteredFlashcards.length;
+            const percentage = Math.round((studied / total) * 100);
+            
+            document.getElementById('flashcard-progress').textContent = `${studied} de ${total}`;
+            document.getElementById('flashcard-percentage').textContent = `${percentage}%`;
+            document.getElementById('flashcard-progress-bar').style.width = `${percentage}%`;
+            
+            // Update stats
+            document.getElementById('total-cards').textContent = total;
+            document.getElementById('studied-cards').textContent = studied;
+            document.getElementById('progress-percentage').textContent = `${percentage}%`;
+        }
+
+        // Quiz
+        function startQuiz() {
+            document.getElementById('quiz-start').classList.add('hidden');
+            document.getElementById('quiz-game').classList.remove('hidden');
+            
+            currentQuizQuestion = 0;
+            quizScore = 0;
+            quizAnswers = [];
+            quizStarted = true;
+            
+            loadQuizQuestion();
+        }
+
+        function loadQuizQuestion() {
+            if (currentQuizQuestion >= quizData.length) {
+                endQuiz();
+                return;
+            }
+            
+            const question = quizData[currentQuizQuestion];
+            
+            document.getElementById('current-question').textContent = currentQuizQuestion + 1;
+            document.getElementById('total-questions').textContent = quizData.length;
+            document.getElementById('question-category').textContent = question.category;
+            document.getElementById('question-difficulty').textContent = `${question.difficulty} • ${question.points} pts`;
+            document.getElementById('question-text').textContent = question.question;
+            
+            // Load options
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'quiz-option';
+                optionElement.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 2rem; height: 2rem; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                            ${String.fromCharCode(65 + index)}
+                        </div>
+                        <span>${option}</span>
+                    </div>
+                `;
+                optionElement.onclick = () => selectAnswer(index);
+                optionsContainer.appendChild(optionElement);
+            });
+            
+            // Update progress
+            const progress = ((currentQuizQuestion + 1) / quizData.length) * 100;
+            document.getElementById('quiz-progress-bar').style.width = `${progress}%`;
+            
+            // Hide explanation and next button
+            document.getElementById('explanation-card').classList.add('hidden');
+            document.getElementById('next-button-container').classList.add('hidden');
+            
+            // Start timer
+            startTimer();
+        }
+
+        function selectAnswer(selectedIndex) {
+            if (!quizStarted) return;
+            
+            clearInterval(quizTimer);
+            
+            const question = quizData[currentQuizQuestion];
+            const isCorrect = selectedIndex === question.correct;
+            const points = isCorrect ? question.points : 0;
+            
+            quizScore += points;
+            quizAnswers.push({
+                questionId: question.id,
+                selected: selectedIndex,
+                correct: question.correct,
+                isCorrect,
+                points
+            });
+            
+            // Update score display
+            document.getElementById('current-score').textContent = quizScore;
+            
+            // Show results on options
+            const options = document.querySelectorAll('.quiz-option');
+            options.forEach((option, index) => {
+                option.onclick = null; // Disable clicking
+                if (index === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedIndex && !isCorrect) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            // Show explanation
+            document.getElementById('explanation-text').textContent = question.explanation;
+            document.getElementById('explanation-card').classList.remove('hidden');
+            document.getElementById('next-button-container').classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuizQuestion++;
+            loadQuizQuestion();
+        }
+
+        function startTimer() {
+            timeLeft = 30;
+            document.getElementById('time-left').textContent = timeLeft;
+            document.getElementById('timer').classList.remove('warning');
+            
+            quizTimer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('time-left').textContent = timeLeft;
+                
+                if (timeLeft <= 10) {
+                    document.getElementById('timer').classList.add('warning');
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(quizTimer);
+                    selectAnswer(-1); // Auto-select wrong answer
+                }
+            }, 1000);
+        }
+
+        function endQuiz() {
+            document.getElementById('quiz-game').classList.add('hidden');
+            document.getElementById('quiz-results').classList.remove('hidden');
+            
+            const correctAnswers = quizAnswers.filter(a => a.isCorrect).length;
+            const percentage = Math.round((quizScore / (quizData.length * 20)) * 100);
+            
+            // Update results
+            document.getElementById('final-score').textContent = quizScore;
+            document.getElementById('final-percentage').textContent = `${percentage}%`;
+            document.getElementById('correct-answers').textContent = `${correctAnswers}/${quizData.length}`;
+            
+            // Update result message and icon
+            let message, icon;
+            if (percentage >= 90) {
+                message = "Excelente!";
+                icon = "🏆";
+            } else if (percentage >= 70) {
+                message = "Muito Bom!";
+                icon = "⭐";
+            } else if (percentage >= 50) {
+                message = "Bom!";
+                icon = "👍";
+            } else {
+                message = "Continue Estudando!";
+                icon = "📚";
+            }
+            
+            document.getElementById('result-message').textContent = message;
+            document.getElementById('result-icon').textContent = icon;
+        }
+
+        function resetQuiz() {
+            document.getElementById('quiz-results').classList.add('hidden');
+            document.getElementById('quiz-start').classList.remove('hidden');
+            
+            currentQuizQuestion = 0;
+            quizScore = 0;
+            quizAnswers = [];
+            quizStarted = false;
+            
+            document.getElementById('current-score').textContent = '0';
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const section = this.getAttribute('data-section');
+                    showSection(section);
+                });
+            });
+            
+            // TOC
+            document.querySelectorAll('.toc-item').forEach(item => {
+                item.addEventListener('click', function() {
+                    const contentKey = this.getAttribute('data-content');
+                    loadContent(contentKey);
+                });
+            });
+            
+            // Flashcard filters
+            document.getElementById('flashcard-difficulty').addEventListener('change', filterFlashcards);
+            document.getElementById('flashcard-category').addEventListener('change', filterFlashcards);
+            
+            // Content search
+            document.getElementById('content-search').addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                // Implement search functionality here
+                console.log('Searching for:', searchTerm);
+            });
+            
+            // Initialize
+            showSection('home');
+        });
+
+        function filterFlashcards() {
+            const difficulty = document.getElementById('flashcard-difficulty').value;
+            const category = document.getElementById('flashcard-category').value;
+            
+            filteredFlashcards = flashcardsData.filter(card => {
+                const matchesDifficulty = !difficulty || card.difficulty === difficulty;
+                const matchesCategory = !category || card.category.toLowerCase().includes(category);
+                return matchesDifficulty && matchesCategory;
+            });
+            
+            currentFlashcard = 0;
+            updateFlashcard();
+        }
+    </script>
+</body>
+</html>
+
