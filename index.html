@@ -3,1630 +3,446 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sociologia da Teologia Reformada - Aplicativo Educacional</title>
+    <title>Cosmovisão Cristã Reformada</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* Reset e Base */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        /* Custom styles for the application */
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light blue-gray background */
         }
 
-        /* Variáveis CSS */
-        :root {
-            --primary: #3b82f6;
-            --primary-dark: #2563eb;
-            --secondary: #64748b;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --light: #f1f5f9;
-            --dark: #1e293b;
-            --border: #e2e8f0;
-            --shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --border-radius: 0.5rem;
-            --transition: all 0.3s ease;
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
         }
 
-        /* Utilitários */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 1rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: 500;
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition);
-            font-size: 0.875rem;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--secondary);
-            border: 1px solid var(--border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--light);
-            transform: translateY(-1px);
-        }
-
-        .card {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .card:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-2px);
-        }
-
-        .card-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .card-body {
-            padding: 1.5rem;
-        }
-
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-
-        .badge-success {
-            background: #dcfce7;
-            color: #166534;
-        }
-
-        .badge-warning {
-            background: #fef3c7;
-            color: #92400e;
-        }
-
-        .badge-danger {
-            background: #fee2e2;
-            color: #991b1b;
-        }
-
-        .progress {
-            width: 100%;
-            height: 0.5rem;
-            background: var(--light);
-            border-radius: 9999px;
-            overflow: hidden;
-        }
-
-        .progress-bar {
-            height: 100%;
-            background: var(--primary);
-            transition: width 0.5s ease;
-        }
-
-        /* Header */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 0;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-link {
-            color: var(--secondary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--primary);
-        }
-
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 4rem 0;
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .hero p {
-            font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* Sections */
-        .section {
-            padding: 4rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.125rem;
-            color: var(--secondary);
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Grid */
-        .grid {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .grid-2 {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        .grid-3 {
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        }
-
-        .grid-4 {
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        }
-
-        /* Flashcard */
-        .flashcard {
+        /* Styles for flashcard flip animation */
+        .flip-card {
             perspective: 1000px;
-            height: 400px;
-            margin-bottom: 2rem;
+            cursor: pointer;
         }
-
-        .flashcard-inner {
+        .flip-card-inner {
             position: relative;
             width: 100%;
             height: 100%;
-            text-align: center;
             transition: transform 0.6s;
             transform-style: preserve-3d;
-            cursor: pointer;
         }
-
-        .flashcard.flipped .flashcard-inner {
+        .flip-card.flipped .flip-card-inner {
             transform: rotateY(180deg);
         }
-
-        .flashcard-front,
-        .flashcard-back {
+        .flip-card-front, .flip-card-back {
             position: absolute;
             width: 100%;
             height: 100%;
+            -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: var(--border-radius);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 2rem;
-            box-shadow: var(--shadow-lg);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
         }
-
-        .flashcard-front {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        .flip-card-front {
+            background: linear-gradient(135deg, #3b82f6, #10b981);
             color: white;
         }
-
-        .flashcard-back {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+        .flip-card-back {
+            background-color: #ffffff;
+            border: 1px solid #e5e7eb;
             transform: rotateY(180deg);
         }
-
-        /* Quiz */
-        .quiz-container {
-            max-width: 800px;
-            margin: 0 auto;
+        
+        /* Animation for content fade-in */
+        .content-module {
+            animation: fadeIn 0.5s ease-in-out;
         }
 
-        .quiz-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-            padding: 1rem;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-        }
-
-        .quiz-question {
-            background: white;
-            padding: 2rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-        }
-
-        .quiz-options {
-            display: grid;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .quiz-option {
-            padding: 1rem;
-            border: 2px solid var(--border);
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition);
-            background: white;
-        }
-
-        .quiz-option:hover {
-            border-color: var(--primary);
-            background: #f8fafc;
-        }
-
-        .quiz-option.correct {
-            border-color: var(--success);
-            background: #dcfce7;
-        }
-
-        .quiz-option.incorrect {
-            border-color: var(--danger);
-            background: #fee2e2;
-        }
-
-        /* Content Viewer */
-        .content-layout {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .sidebar {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 1.5rem;
-            height: fit-content;
-            position: sticky;
-            top: 100px;
-        }
-
-        .content-main {
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            padding: 2rem;
-        }
-
-        .toc-item {
-            padding: 0.5rem;
-            border-radius: var(--border-radius);
-            cursor: pointer;
-            transition: var(--transition);
-            margin-bottom: 0.5rem;
-        }
-
-        .toc-item:hover,
-        .toc-item.active {
-            background: var(--light);
-            color: var(--primary);
-        }
-
-        /* Search */
-        .search-container {
-            position: relative;
-            margin-bottom: 2rem;
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: var(--border-radius);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        /* Filters */
-        .filters {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .filter-select {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: var(--border-radius);
-            background: white;
-            cursor: pointer;
-        }
-
-        /* Stats */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            text-align: center;
-            padding: 1.5rem;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .stat-label {
-            color: var(--secondary);
-            font-size: 0.875rem;
-        }
-
-        /* Highlights */
-        .highlight {
-            background: #fef08a;
-            padding: 0.125rem 0.25rem;
-            border-radius: 0.25rem;
-        }
-
-        /* Animations */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-
-        .animate-fade-in {
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        .animate-slide-in {
-            animation: slideIn 0.6s ease-out;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .content-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .sidebar {
-                position: static;
-            }
-
-            .grid-2,
-            .grid-3,
-            .grid-4 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Hidden class */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Timer */
-        .timer {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 600;
-        }
-
-        .timer.warning {
-            color: var(--danger);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--dark);
-            color: white;
-            padding: 3rem 0 1rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .footer-section a {
-            color: #94a3b8;
-            text-decoration: none;
-            transition: var(--transition);
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #374151;
-            color: #94a3b8;
-        }
     </style>
 </head>
-<body>
-    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <nav class="nav">
-                <a href="#" class="logo">
-                    📚 Sociologia da Teologia Reformada
-                </a>
-                <ul class="nav-links">
-                    <li><a href="#" class="nav-link active" data-section="home">Início</a></li>
-                    <li><a href="#" class="nav-link" data-section="content">Conteúdo</a></li>
-                    <li><a href="#" class="nav-link" data-section="flashcards">Flashcards</a></li>
-                    <li><a href="#" class="nav-link" data-section="quiz">Quiz</a></li>
-                    <li><a href="#" class="nav-link" data-section="about">Sobre</a></li>
+<body class="bg-gray-100">
+
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-72 bg-white shadow-lg transform -translate-x-full md:translate-x-0 transition-transform duration-300 ease-in-out z-30 fixed md:relative h-full flex flex-col">
+            <div class="p-6 bg-gradient-to-br from-blue-500 to-green-400 text-white">
+                <h1 class="text-xl font-bold">Sociologia Geral segundo a Cosmovisão Cristã</h1>
+            </div>
+            <nav class="mt-4 flex-1 overflow-y-auto">
+                <ul>
+                    <!-- Menu items will be injected here by JS -->
                 </ul>
             </nav>
-        </div>
-    </header>
+        </aside>
 
-    <!-- Main Content -->
-    <main id="main-content">
-        <!-- Home Section -->
-        <section id="home-section" class="section-content">
-            <!-- Hero -->
-            <div class="hero">
-                <div class="container">
-                    <h1>Sociologia da <span style="color: #fbbf24;">Teologia Reformada</span></h1>
-                    <p>Uma análise interdisciplinar que explora a intersecção entre sociologia e teologia reformada, oferecendo insights sobre pobreza, preconceito, corrupção e política.</p>
-                    <div class="hero-buttons">
-                        <button class="btn btn-primary" onclick="showSection('content')">
-                            ▶️ Começar Estudos
-                        </button>
-                        <button class="btn btn-secondary" onclick="showSection('content')">
-                            📖 Ver Conteúdo
-                        </button>
-                    </div>
-                </div>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-y-auto">
+            <!-- Top bar with menu toggle for mobile -->
+            <header class="bg-white shadow-md p-4 flex items-center justify-between md:hidden sticky top-0 z-20">
+                <h2 id="mobile-header-title" class="text-lg font-bold text-gray-700">Módulo 1</h2>
+                <button id="menu-toggle" class="text-gray-600 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </header>
+
+            <!-- Content Area -->
+            <div id="content-area" class="p-4 sm:p-6 lg:p-8 flex-1">
+                <!-- Module content will be injected here -->
             </div>
 
-            <!-- Stats -->
-            <div class="section">
-                <div class="container">
-                    <div class="stats">
-                        <div class="card stat-card">
-                            <div class="stat-number">10+</div>
-                            <div class="stat-label">Capítulos</div>
-                        </div>
-                        <div class="card stat-card">
-                            <div class="stat-number">50+</div>
-                            <div class="stat-label">Flashcards</div>
-                        </div>
-                        <div class="card stat-card">
-                            <div class="stat-number">100+</div>
-                            <div class="stat-label">Questões Quiz</div>
-                        </div>
-                        <div class="card stat-card">
-                            <div class="stat-number">30+</div>
-                            <div class="stat-label">Conceitos</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- Footer -->
+            <footer class="text-center p-4 bg-white border-t border-gray-200">
+                <p class="text-sm text-gray-500">Desenvolvido por Rodrigo Niskier, ChatGPT e POE.</p>
+            </footer>
+        </main>
+    </div>
 
-            <!-- Features -->
-            <div class="section" style="background: white;">
-                <div class="container">
-                    <h2 class="section-title">Recursos Educacionais</h2>
-                    <p class="section-subtitle">Uma plataforma completa para o estudo da sociologia da teologia reformada</p>
-                    
-                    <div class="grid grid-3">
-                        <div class="card" onclick="showSection('content')">
-                            <div class="card-body">
-                                <div style="font-size: 2rem; margin-bottom: 1rem;">📚</div>
-                                <h3 style="margin-bottom: 1rem;">Conteúdo Acadêmico</h3>
-                                <p>Textos aprofundados sobre sociologia e teologia reformada com referências acadêmicas.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="card" onclick="showSection('flashcards')">
-                            <div class="card-body">
-                                <div style="font-size: 2rem; margin-bottom: 1rem;">🧠</div>
-                                <h3 style="margin-bottom: 1rem;">Flashcards Interativos</h3>
-                                <p>Sistema de repetição espaçada para memorização eficiente de conceitos-chave.</p>
-                            </div>
-                        </div>
-                        
-                        <div class="card" onclick="showSection('quiz')">
-                            <div class="card-body">
-                                <div style="font-size: 2rem; margin-bottom: 1rem;">🎯</div>
-                                <h3 style="margin-bottom: 1rem;">Quizzes Gamificados</h3>
-                                <p>Testes interativos com sistema de pontuação e progresso visual.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Overlay for mobile menu -->
+    <div id="overlay" class="fixed inset-0 bg-black opacity-50 hidden z-20 md:hidden" onclick="toggleMenu()"></div>
 
-        <!-- Content Section -->
-        <section id="content-section" class="section-content hidden">
-            <div class="section">
-                <div class="container">
-                    <h2 class="section-title">Conteúdo Acadêmico</h2>
-                    <p class="section-subtitle">Material completo sobre Sociologia da Teologia Reformada</p>
-                    
-                    <!-- Search and Filters -->
-                    <div class="search-container">
-                        <input type="text" class="search-input" placeholder="🔍 Buscar no conteúdo..." id="content-search">
-                    </div>
-                    
-                    <div class="filters">
-                        <select class="filter-select" id="difficulty-filter">
-                            <option value="">Todas as dificuldades</option>
-                            <option value="basico">Básico</option>
-                            <option value="intermediario">Intermediário</option>
-                            <option value="avancado">Avançado</option>
-                        </select>
-                        <button class="btn btn-secondary">📄 Download PDF</button>
-                    </div>
-                    
-                    <!-- Content Layout -->
-                    <div class="content-layout">
-                        <!-- Sidebar -->
-                        <div class="sidebar">
-                            <h3 style="margin-bottom: 1rem;">📋 Sumário</h3>
-                            <div id="table-of-contents">
-                                <div class="toc-item active" data-content="fundamentos">
-                                    <strong>1. Fundamentos da Sociologia</strong>
-                                    <div style="font-size: 0.875rem; color: var(--secondary);">15 min • 2 seções</div>
-                                </div>
-                                <div class="toc-item" data-content="problemas">
-                                    <strong>2. Problemas Sociais</strong>
-                                    <div style="font-size: 0.875rem; color: var(--secondary);">25 min • 4 seções</div>
-                                </div>
-                                <div class="toc-item" data-content="instituicoes">
-                                    <strong>3. Instituições Sociais</strong>
-                                    <div style="font-size: 0.875rem; color: var(--secondary);">20 min • 3 seções</div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Main Content -->
-                        <div class="content-main">
-                            <div id="content-display">
-                                <!-- Content will be loaded here -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Flashcards Section -->
-        <section id="flashcards-section" class="section-content hidden">
-            <div class="section">
-                <div class="container">
-                    <h2 class="section-title">Flashcards Interativos</h2>
-                    <p class="section-subtitle">Sistema de repetição espaçada para memorização eficiente</p>
-                    
-                    <!-- Filters -->
-                    <div class="filters">
-                        <select class="filter-select" id="flashcard-difficulty">
-                            <option value="">Todas as dificuldades</option>
-                            <option value="basico">Básico</option>
-                            <option value="intermediario">Intermediário</option>
-                            <option value="avancado">Avançado</option>
-                        </select>
-                        <select class="filter-select" id="flashcard-category">
-                            <option value="">Todas as categorias</option>
-                            <option value="fundamentos">Fundamentos</option>
-                            <option value="teologia">Teologia Reformada</option>
-                            <option value="problemas">Problemas Sociais</option>
-                        </select>
-                        <button class="btn btn-secondary" onclick="resetFlashcards()">🔄 Reiniciar</button>
-                    </div>
-                    
-                    <!-- Progress -->
-                    <div class="card" style="margin-bottom: 2rem;">
-                        <div class="card-body">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                <span>Progresso: <span id="flashcard-progress">0 de 10</span> estudados</span>
-                                <span id="flashcard-percentage">0%</span>
-                            </div>
-                            <div class="progress">
-                                <div class="progress-bar" id="flashcard-progress-bar" style="width: 0%"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Flashcard -->
-                    <div class="flashcard" id="flashcard" onclick="flipCard()">
-                        <div class="flashcard-inner" id="flashcard-inner">
-                            <div class="flashcard-front">
-                                <div style="margin-bottom: 1rem;">
-                                    <span class="badge badge-success" id="flashcard-category-badge">Fundamentos</span>
-                                    <span class="badge badge-warning" id="flashcard-difficulty-badge">Básico</span>
-                                </div>
-                                <h3 id="flashcard-question" style="margin-bottom: 2rem;">O que é Sociologia?</h3>
-                                <div style="margin-bottom: 1rem;">
-                                    <span class="badge" style="background: #e0e7ff; color: #3730a3;" id="flashcard-tags">conceitos</span>
-                                </div>
-                                <p style="opacity: 0.8;">Clique para ver a resposta</p>
-                            </div>
-                            <div class="flashcard-back">
-                                <div style="margin-bottom: 1rem;">
-                                    <span class="badge" style="background: rgba(255,255,255,0.2); color: white;">✅ Resposta</span>
-                                </div>
-                                <p id="flashcard-answer">A Sociologia é a ciência que estuda a sociedade em sua totalidade, buscando compreender as interações humanas, as estruturas sociais, os processos de mudança e as formas de organização coletiva.</p>
-                                <p style="opacity: 0.8; margin-top: 2rem;">Clique para voltar à pergunta</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Navigation -->
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;">
-                        <button class="btn btn-secondary" onclick="previousCard()">⬅️ Anterior</button>
-                        <span id="flashcard-counter">1 de 10</span>
-                        <button class="btn btn-secondary" onclick="nextCard()">Próximo ➡️</button>
-                    </div>
-                    
-                    <!-- Stats -->
-                    <div class="stats" style="margin-top: 2rem;">
-                        <div class="card stat-card">
-                            <div class="stat-number" id="total-cards">10</div>
-                            <div class="stat-label">Total de Cards</div>
-                        </div>
-                        <div class="card stat-card">
-                            <div class="stat-number" id="studied-cards">0</div>
-                            <div class="stat-label">Estudados</div>
-                        </div>
-                        <div class="card stat-card">
-                            <div class="stat-number" id="progress-percentage">0%</div>
-                            <div class="stat-label">Progresso</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Quiz Section -->
-        <section id="quiz-section" class="section-content hidden">
-            <div class="section">
-                <div class="container">
-                    <!-- Quiz Start Screen -->
-                    <div id="quiz-start" class="quiz-container">
-                        <div style="text-align: center;">
-                            <div style="font-size: 4rem; margin-bottom: 2rem;">🏆</div>
-                            <h2 class="section-title">Quiz de Sociologia da Teologia Reformada</h2>
-                            <p class="section-subtitle">Teste seus conhecimentos sobre sociologia e teologia reformada. Você terá 30 segundos para responder cada questão.</p>
-                            
-                            <div class="stats" style="margin-bottom: 3rem;">
-                                <div class="card stat-card">
-                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
-                                    <div class="stat-number">10</div>
-                                    <div class="stat-label">Questões</div>
-                                </div>
-                                <div class="card stat-card">
-                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">⏱️</div>
-                                    <div class="stat-number">30s</div>
-                                    <div class="stat-label">Por Questão</div>
-                                </div>
-                                <div class="card stat-card">
-                                    <div style="font-size: 2rem; margin-bottom: 0.5rem;">⭐</div>
-                                    <div class="stat-number">100</div>
-                                    <div class="stat-label">Pontos Máximos</div>
-                                </div>
-                            </div>
-                            
-                            <button class="btn btn-primary" onclick="startQuiz()" style="font-size: 1.125rem; padding: 1rem 2rem;">
-                                ▶️ Iniciar Quiz
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <!-- Quiz Game -->
-                    <div id="quiz-game" class="quiz-container hidden">
-                        <!-- Quiz Header -->
-                        <div class="quiz-header">
-                            <div>
-                                <h3>Quiz</h3>
-                                <p>Questão <span id="current-question">1</span> de <span id="total-questions">10</span></p>
-                            </div>
-                            <div style="display: flex; gap: 2rem; align-items: center;">
-                                <div class="timer" id="timer">
-                                    ⏱️ <span id="time-left">30</span>s
-                                </div>
-                                <div>
-                                    ⭐ <span id="current-score">0</span> pts
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Progress -->
-                        <div class="progress" style="margin-bottom: 2rem;">
-                            <div class="progress-bar" id="quiz-progress-bar" style="width: 10%"></div>
-                        </div>
-                        
-                        <!-- Question -->
-                        <div class="quiz-question">
-                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                                <span class="badge badge-success" id="question-category">Fundamentos da Sociologia</span>
-                                <span class="badge badge-warning" id="question-difficulty">Básico • 10 pts</span>
-                            </div>
-                            <h3 id="question-text">Quem é considerado o fundador da Sociologia?</h3>
-                            
-                            <div class="quiz-options" id="quiz-options">
-                                <!-- Options will be loaded here -->
-                            </div>
-                        </div>
-                        
-                        <!-- Explanation -->
-                        <div id="explanation-card" class="card hidden" style="border-left: 4px solid var(--primary);">
-                            <div class="card-body">
-                                <h4 style="color: var(--primary); margin-bottom: 1rem;">💡 Explicação:</h4>
-                                <p id="explanation-text"></p>
-                            </div>
-                        </div>
-                        
-                        <!-- Next Button -->
-                        <div id="next-button-container" class="hidden" style="text-align: center; margin-top: 2rem;">
-                            <button class="btn btn-primary" onclick="nextQuestion()">Próxima Questão</button>
-                        </div>
-                    </div>
-                    
-                    <!-- Quiz Results -->
-                    <div id="quiz-results" class="quiz-container hidden">
-                        <div style="text-align: center;">
-                            <div id="result-icon" style="font-size: 4rem; margin-bottom: 2rem;">🏆</div>
-                            <h2 class="section-title">Quiz Concluído!</h2>
-                            <p id="result-message" style="font-size: 1.25rem; color: var(--primary); font-weight: 600; margin-bottom: 3rem;">Excelente</p>
-                            
-                            <div class="stats" style="margin-bottom: 3rem;">
-                                <div class="card stat-card">
-                                    <div class="stat-number" id="final-score">0</div>
-                                    <div class="stat-label">Pontos Obtidos</div>
-                                </div>
-                                <div class="card stat-card">
-                                    <div class="stat-number" id="final-percentage">0%</div>
-                                    <div class="stat-label">Aproveitamento</div>
-                                </div>
-                                <div class="card stat-card">
-                                    <div class="stat-number" id="correct-answers">0/10</div>
-                                    <div class="stat-label">Acertos</div>
-                                </div>
-                            </div>
-                            
-                            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-                                <button class="btn btn-secondary" onclick="resetQuiz()">🔄 Tentar Novamente</button>
-                                <button class="btn btn-primary" onclick="showSection('flashcards')">📚 Estudar Flashcards</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about-section" class="section-content hidden">
-            <div class="section">
-                <div class="container">
-                    <div style="max-width: 800px; margin: 0 auto;">
-                        <h2 class="section-title">Sobre o Projeto</h2>
-                        
-                        <div class="card">
-                            <div class="card-body">
-                                <p style="font-size: 1.125rem; margin-bottom: 2rem;">
-                                    Este aplicativo educacional foi desenvolvido para explorar a intersecção entre sociologia e teologia reformada, 
-                                    oferecendo uma análise interdisciplinar de questões sociais fundamentais.
-                                </p>
-                                
-                                <h3 style="margin-bottom: 1rem;">📚 Metodologia</h3>
-                                <p style="margin-bottom: 2rem;">
-                                    O conteúdo foi elaborado com base em pesquisa acadêmica rigorosa, integrando perspectivas sociológicas 
-                                    clássicas com os princípios da teologia reformada. Cada seção inclui referências bibliográficas e 
-                                    análises críticas dos temas abordados.
-                                </p>
-                                
-                                <h3 style="margin-bottom: 1rem;">🎮 Recursos Interativos</h3>
-                                <p style="margin-bottom: 2rem;">
-                                    A plataforma oferece múltiplas formas de engajamento com o conteúdo, incluindo flashcards para 
-                                    memorização, quizzes gamificados para avaliação e um sistema de busca avançado para navegação eficiente.
-                                </p>
-                                
-                                <h3 style="margin-bottom: 1rem;">🤖 Desenvolvido por</h3>
-                                <p>
-                                    <strong>Rodrigo Niskier - ChatGPT e Manus.<strong>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>📚 Sociologia da Teologia Reformada</h3>
-                    <p>Uma plataforma educacional dedicada ao estudo interdisciplinar da sociologia e teologia reformada.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Recursos</h3>
-                    <ul style="list-style: none;">
-                        <li><a href="#" onclick="showSection('content')">Conteúdo</a></li>
-                        <li><a href="#" onclick="showSection('flashcards')">Flashcards</a></li>
-                        <li><a href="#" onclick="showSection('quiz')">Quiz</a></li>
-                        <li><a href="#">Glossário</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Sobre</h3>
-                    <ul style="list-style: none;">
-                        <li><a href="#" onclick="showSection('about')">Metodologia</a></li>
-                        <li><a href="#">Referências</a></li>
-                        <li><a href="#">Contato</a></li>
-                        <li><a href="#">Suporte</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Desenvolvido por Rodrigo Niskier, ChatGPT e Manus.</p>
-            </div>
-        </div>
-    </footer>
 
     <script>
-        // Data
-        const flashcardsData = [
+        // --- DATA ---
+        const modules = [
+            // Módulo 1
             {
-                id: 1,
-                category: "Fundamentos",
-                question: "O que é Sociologia?",
-                answer: "A Sociologia é a ciência que estuda a sociedade em sua totalidade, buscando compreender as interações humanas, as estruturas sociais, os processos de mudança e as formas de organização coletiva.",
-                difficulty: "basico",
-                tags: ["conceitos", "definição"]
+                title: "Fundamentos da Cosmovisão Cristã Reformada",
+                emoji: "📘",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md">
+                            <h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3>
+                            <p class="text-gray-700">Introduzir os fundamentos teológicos e filosóficos da cosmovisão cristã reformada, demonstrando como eles moldam a interpretação da realidade social. Este módulo estabelece as bases bíblicas e doutrinárias necessárias para uma sociologia centrada em Deus, com base em pensadores como Agostinho de Hipona (354-430), João Calvino (1509-1564) e Abraham Kuyper (1837-1920).</p>
+                        </div>
+
+                        <div class="p-6 bg-white rounded-xl shadow-md">
+                            <h4 class="text-xl font-bold text-green-600 mb-4">🔑 Unidade 1: O que é Cosmovisão Cristã?</h4>
+                            <p class="mb-4 text-gray-600"><strong class="text-gray-800">Conceito:</strong> Cosmovisão (do alemão "Weltanschauung") é a estrutura de crenças e pressupostos fundamentais através da qual um indivíduo ou grupo interpreta a realidade. Como James Sire (1933-2018) argumentou em "O Universo ao Lado", todos possuem uma cosmovisão, consciente ou inconscientemente.</p>
+                            <div class="mt-4 p-4 border-l-4 border-blue-400 bg-blue-50 rounded-r-lg"><h5 class="font-semibold text-blue-800">Cosmovisão Cristã Reformada:</h5><ul class="list-disc list-inside mt-2 space-y-1 text-gray-700"><li><strong>Deus é o centro:</strong> Ele é o Criador (Gênesis 1:1), Sustentador (Colossenses 1:17) e Redentor de todas as coisas (Apocalipse 21:5-6).</li><li><strong>Senhorio de Cristo:</strong> Toda a realidade é interpretada sob a autoridade de Cristo, e todo pensamento deve ser levado cativo a Ele (2 Coríntios 10:5).</li><li><strong>Estrutura da História:</strong> A realidade é compreendida através de quatro grandes atos do drama divino: Criação, Queda, Redenção e Consumação.</li></ul></div>
+                        </div>
+
+                        <div class="p-6 bg-white rounded-xl shadow-md">
+                            <h4 class="text-xl font-bold text-green-600 mb-4">📖 Unidade 2: Criação – Ordem e Propósito</h4>
+                            <p class="mb-4 text-gray-600"><strong class="text-gray-800">Doutrina:</strong> Deus criou o universo "ex nihilo" (do nada), e tudo o que Ele fez era "muito bom" (Gênesis 1:31). A criação possui uma ordem intrínseca, propósito e significado, não sendo fruto do acaso.</p>
+                            <div class="mt-4 p-4 border-l-4 border-yellow-400 bg-yellow-50 rounded-r-lg"><h5 class="font-semibold text-yellow-800">Implicações sociológicas:</h5><ul class="list-disc list-inside mt-2 space-y-1 text-gray-700"><li>A realidade social (família, trabalho, arte, governo) é parte da boa criação, não um mal necessário.</li><li>A dignidade humana é universal, pois todo ser humano é criado à imagem de Deus (Imago Dei - Gênesis 1:26-28), independentemente de suas capacidades ou status.</li><li><strong>Esferas de Soberania:</strong> Conceito de Abraham Kuyper que afirma que Deus instituiu diferentes esferas na sociedade (família, governo, igreja, etc.), cada uma com sua própria autoridade delegada e responsabilidade direta a Deus.</li></ul></div>
+                        </div>
+
+                        <div class="p-6 bg-white rounded-xl shadow-md">
+                            <h4 class="text-xl font-bold text-green-600 mb-4">🧬 Unidade 3: Queda – O Pecado e a Desordem Social</h4>
+                            <p class="mb-4 text-gray-600"><strong class="text-gray-800">Doutrina:</strong> A desobediência de Adão em Gênesis 3 introduziu o pecado no mundo, rompendo a harmonia original da criação. A Queda afetou todas as dimensões da existência (Romanos 5:12), incluindo as estruturas sociais. A doutrina da Depravação Total sustenta que o pecado corrompeu cada aspecto da natureza humana, embora não anule a Imago Dei.</p>
+                            <blockquote class="mt-4 p-4 bg-gray-100 border-l-4 border-gray-400 text-gray-600 italic rounded-r-lg">“O coração do homem é uma fábrica de ídolos.” – João Calvino, Institutas da Religião Cristã (1536). Esta citação ilustra como a idolatria, a raiz do pecado, se manifesta em todas as áreas, incluindo a busca por poder, riqueza ou ideologias.</blockquote>
+                        </div>
+                        
+                        <div class="p-6 bg-white rounded-xl shadow-md">
+                            <h4 class="text-xl font-bold text-green-600 mb-4">✝️ Unidade 4: Redenção – Cristo como Centro da História</h4>
+                            <p class="mb-4 text-gray-600"><strong class="text-gray-800">Doutrina:</strong> A redenção em Cristo não é apenas para a salvação de almas individuais, mas para a restauração de "todas as coisas" (Efésios 1:10; Colossenses 1:19-20). A graça de Deus opera na transformação de indivíduos e, através deles, na cultura, ainda que de forma parcial nesta era.</p>
+                            <p class="text-gray-700">A igreja, como corpo de Cristo, é a "nova humanidade" (Efésios 2:15), chamada a viver segundo uma nova ética (o Sermão do Monte, Mateus 5-7) e a ser "sal da terra e luz do mundo" (Mateus 5:13-16).</p>
+                        </div>
+
+                        <div class="p-6 bg-white rounded-xl shadow-md">
+                            <h4 class="text-xl font-bold text-green-600 mb-4">📚 Unidade 5: A Centralidade das Escrituras na Leitura Social</h4>
+                            <p class="mb-4 text-gray-600"><strong class="text-gray-800">Doutrina:</strong> As Escrituras são a revelação autoritativa e suficiente de Deus, guiando o cristão em toda boa obra (2 Timóteo 3:16-17). Isso inclui a tarefa de interpretar corretamente a realidade social.</p>
+                            <p class="text-gray-700">Contra o sociologismo secular, que vê a sociedade como a realidade última, a perspectiva reformada afirma que as Escrituras interpretam a sociedade, e não o contrário. A Palavra de Deus revela a raiz dos problemas sociais no coração humano (Hebreus 4:12) e oferece o único caminho para a verdadeira justiça.</p>
+                        </div>
+                        
+                         <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md">
+                             <h3 class="text-2xl font-bold text-yellow-700 mb-4">📌 Conclusão do Módulo:</h3>
+                             <p class="text-gray-700">A partir de uma compreensão bíblica da Criação (a ordem original de Deus), da Queda (a fonte da desordem) e da Redenção (a esperança de restauração), o cristão pode interpretar criticamente a sociedade. Ele reconhece as marcas da glória criacional em todas as áreas, ao mesmo tempo em que discerne os efeitos devastadores do pecado e trabalha pela redenção em Cristo.</p>
+                        </div>
+                        
+                        <div class="p-6 bg-white rounded-xl shadow-lg">
+                            <h3 class="text-2xl font-bold text-blue-600 mb-4">⭐ Atividades</h3>
+                            <ul class="list-disc list-inside space-y-2 text-gray-700">
+                                <li><strong>Reflexão Pessoal:</strong> Como sua visão de mundo atual (seja ela cristã, secular, etc.) molda sua interpretação de um problema social como a pobreza? Compare com a visão bíblica apresentada.</li>
+                                <li><strong>Leitura Dirigida:</strong> Resuma o capítulo 1 de "A Criação Restaurada" de Albert Wolters, focando em como ele define "estrutura" e "direção".</li>
+                                <li><strong>Discussão em Grupo:</strong> Como a doutrina da soberania de Deus (Salmo 115:3) afeta nossa forma de ver as instituições sociais como o governo e a economia?</li>
+                            </ul>
+                        </div>
+                    </div>`
             },
+            // Módulo 2
             {
-                id: 2,
-                category: "Teologia Reformada",
-                question: "O que significa 'Depravação Total' na Teologia Reformada?",
-                answer: "A doutrina da depravação total ensina que o pecado corrompeu todas as facetas do ser humano – intelecto, emoções, vontade e corpo. Não significa que o ser humano é tão mau quanto poderia ser, mas que todas as áreas foram afetadas pelo pecado.",
-                difficulty: "intermediario",
-                tags: ["doutrina", "pecado"]
+                title: "A Sociologia e sua Redenção em Cristo",
+                emoji: "📘",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3><p class="text-gray-700">Apresentar a origem da sociologia moderna, seus pressupostos seculares e limitações, contrastando-a com uma leitura bíblica e teocêntrica das relações sociais, conforme desenvolvida por autores como Vern Poythress.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🔑 Unidade 1: O nascimento da sociologia moderna</h4><p class="mb-2 text-gray-600"><strong class="text-gray-800">Contexto histórico:</strong> A sociologia surge no século XIX, um período de intensas transformações na Europa (Revolução Industrial, Revolução Francesa, urbanização). Pensadores como Auguste Comte (1798-1857), Émile Durkheim (1858-1917) e Max Weber (1864-1920) buscaram entender a nova ordem social usando métodos científicos e racionais, deliberadamente separando a análise social da teologia.</p><div class="mt-4 p-4 border-l-4 border-red-400 bg-red-50 rounded-r-lg"><h5 class="font-semibold text-red-800">Crítica reformada:</h5><ul class="list-disc list-inside mt-2 space-y-1 text-gray-700"><li>Qualquer ciência social que exclui Deus como Criador e Sustentador inevitavelmente eleva outra coisa (a razão humana, a economia, a estrutura social) ao status de princípio último, incorrendo em idolatria (Romanos 1:21-23).</li><li>A neutralidade científica é um mito. Todo pesquisador é influenciado por seus pressupostos (sua cosmovisão).</li></ul></div></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">📖 Unidade 2: A crítica reformada à sociologia secular</h4><p class="mb-2 text-gray-600">A cosmovisão subjacente à sociologia secular geralmente inclui: Naturalismo, Humanismo e Relativismo. Isso leva a explicações reducionistas da sociedade (ex: marxismo, que reduz tudo à luta de classes).</p><blockquote class="mt-4 p-4 bg-gray-100 border-l-4 border-gray-400 text-gray-600 italic rounded-r-lg">“A sociologia, quando redimida pela Escritura, reconhece que as relações humanas existem em um mundo criado por Deus, corrompido pelo pecado e sujeito à redenção por Cristo.” – Vern Poythress, Redeeming Sociology (2011)</blockquote></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🧬 Unidade 3: Uma abordagem teocêntrica da sociedade</h4><p class="mb-2 text-gray-600"><strong class="text-gray-800">Multiperspectivismo (John Frame / Vern Poythress):</strong> Para evitar o reducionismo, a realidade social deve ser analisada a partir de múltiplas perspectivas que se inter-relacionam, como:</p><ul class="list-disc list-inside mt-2 space-y-1 text-gray-700"><li><strong>Perspectiva Normativa:</strong> Quais são as leis e os padrões de Deus para esta área (a Bíblia)?</li><li><strong>Perspectiva Situacional:</strong> Quais são os fatos, as estruturas e as circunstâncias da realidade (a análise empírica)?</li><li><strong>Perspectiva Existencial:</strong> Como as pessoas experimentam e respondem a essa realidade (a experiência humana)?</li></ul></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">✝️ Unidade 4: O chamado do cristão ao engajamento fiel</h4><p class="mb-2 text-gray-600">O cristão, como sociólogo e cidadão, analisa o mundo à luz da Bíblia, não do "espírito da época". Ele confronta as idolatrias sociais (consumismo, nacionalismo, etc.) e serve ao próximo com sabedoria (Miqueias 6:8).</p><p class="text-gray-700">A aplicação prática envolve criticar sem demonizar (reconhecendo a graça comum) e transformar sem utopia (confiando na consumação futura de Cristo, Filipenses 3:20).</p></div>
+                        <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md"><h3 class="text-2xl font-bold text-yellow-700 mb-4">📚 Conclusão do Módulo:</h3><p class="text-gray-700">A sociologia não é inerentemente má, mas, como toda área do conhecimento, precisa ser redimida. Submetida ao senhorio de Cristo e interpretada pela Escritura, ela se torna uma ferramenta poderosa para compreender o mundo, amar o próximo e glorificar a Deus.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg"><h3 class="text-2xl font-bold text-blue-600 mb-4">⭐ Atividades Sugeridas</h3><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Leitura Dirigida:</strong> Leia o capítulo introdutório de "Redeeming Sociology" de Vern Poythress.</li><li><strong>Reflexão Escrita:</strong> Quais pressupostos (naturalistas, humanistas, etc.) moldam a análise social em sua universidade ou ambiente profissional? Contraste-os com pressupostos bíblicos.</li></ul></div>
+                    </div>`
             },
+            // Módulo 3
             {
-                id: 3,
-                category: "Problemas Sociais",
-                question: "Como a Teologia Reformada aborda a questão da pobreza?",
-                answer: "A Teologia Reformada vê a pobreza como consequência da Queda e do pecado, mas enfatiza a responsabilidade cristã de cuidar dos pobres através da mordomia, caridade e transformação de estruturas injustas.",
-                difficulty: "intermediario",
-                tags: ["pobreza", "justiça social"]
+                title: "Estruturas Sociais e o Mandato Cultural",
+                emoji: "�",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3><p class="text-gray-700">Analisar as estruturas sociais fundamentais (família, governo, igreja) como ordenações divinas e explorar o chamado humano para exercer o Mandato Cultural de forma redentora.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🔑 Unidade 1: O Mandato Cultural e o papel do ser humano</h4><p class="mb-4 text-gray-600"><strong class="text-gray-800">Texto-base:</strong> Gênesis 1:26-28 e Gênesis 2:15. Deus comissionou a humanidade para "ser fecunda, multiplicar-se, encher e subjugar a terra" e "cultivar e guardar" o jardim. Este é o chamado para desenvolver o potencial da criação, ou seja, criar cultura.</p><p class="text-gray-700">Este mandato não foi anulado pela Queda, mas foi distorcido. A redenção em Cristo nos capacita a cumpri-lo para a glória de Deus.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🏛 Unidade 2: Instituições sociais ordenadas por Deus</h4><p class="mb-4 text-gray-700"><strong class="text-gray-800">Doutrina de Kuyper: Esferas de Soberania.</strong> Cada esfera (família, igreja, estado, ciência, arte) tem sua própria autoridade delegada por Deus e não deve ser dominada pelas outras. O totalitarismo ocorre quando uma esfera (geralmente o Estado) tenta usurpar a autoridade das demais.</p><div class="grid md:grid-cols-3 gap-4 text-center"><div class="p-4 bg-green-100 rounded-lg border border-green-200"><i class="fas fa-heart text-3xl text-green-600 mb-2"></i><h5 class="font-bold">Família</h5><p class="text-sm">Base da sociedade, instituída em Gênesis 2:18-25.</p></div><div class="p-4 bg-yellow-100 rounded-lg border border-yellow-200"><i class="fas fa-balance-scale text-3xl text-yellow-600 mb-2"></i><h5 class="font-bold">Governo Civil</h5><p class="text-sm">Instituído para promover justiça e restringir o mal (Romanos 13:1-7).</p></div><div class="p-4 bg-blue-100 rounded-lg border border-blue-200"><i class="fas fa-church text-3xl text-blue-600 mb-2"></i><h5 class="font-bold">Igreja</h5><p class="text-sm">Comunidade redimida, portadora do evangelho (Mateus 28:18-20).</p></div></div></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">⚖ Unidade 3: Autoridade, liberdade e responsabilidade</h4><p class="mb-2 text-gray-700"><strong>Princípios bíblicos:</strong> Toda autoridade é delegada por Deus (João 19:11). A verdadeira liberdade não é autonomia, mas a sujeição à verdade de Deus (João 8:32). Responsabilidade é o dever de responder a Deus em cada esfera.</p><p class="text-gray-700">A rejeição da autoridade de Deus leva ou ao autoritarismo (a autoridade humana se torna absoluta) ou ao anarquismo (a negação de toda autoridade).</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">✝ Unidade 4: A distorção estrutural pelo pecado</h4><p class="text-gray-700">O pecado não é apenas um ato individual, mas também se entrincheira em sistemas e instituições. A Torre de Babel (Gênesis 11:1-9) é o arquétipo de uma estrutura social unificada em rebelião contra Deus, buscando autonomia e glória para si mesma. A monarquia em Israel foi pedida pelo povo para "ser como as outras nações" (1 Samuel 8), uma distorção do governo teocrático.</p></div>
+                        <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md"><h3 class="text-2xl font-bold text-yellow-700 mb-4">📚 Conclusão do Módulo:</h3><p class="text-gray-700">A compreensão reformada das estruturas sociais nos chama a viver como mordomos fiéis, respeitando os limites e propósitos de cada esfera e buscando redimir nossa participação nelas sob a autoridade de Cristo.</p></blockquote></div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg"><h3 class="text-2xl font-bold text-blue-600 mb-4">⭐ Atividades Sugeridas</h3><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Exercício Prático:</strong> Identifique em sua vida como você está envolvido nas três esferas (família, governo, igreja). Quais desafios e oportunidades você enxerga em cada uma?</li><li><strong>Estudo Bíblico:</strong> Leia Romanos 13:1-7 e Atos 5:29. Como esses textos se equilibram?</li></ul></div>
+                    </div>`
             },
+            // Módulo 4
             {
-                id: 4,
-                category: "Fundamentos",
-                question: "Quais são as principais instituições sociais?",
-                answer: "As principais instituições sociais são: Família (socialização primária), Educação (transmissão de conhecimento), Religião (sistemas de crenças), Economia (produção e distribuição) e Política/Estado (ordem e poder).",
-                difficulty: "basico",
-                tags: ["instituições", "sociedade"]
+                title: "Cultura, Cosmovisão e Sociedade",
+                emoji: "📘",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3><p class="text-gray-700">Analisar o conceito de cultura, sua origem no mandato divino e sua corrupção pelo pecado, desenvolvendo critérios para um engajamento cristão fiel e transformador.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🔑 Unidade 1: O que é cultura?</h4><p class="text-gray-700">Para o teólogo Andy Crouch, cultura é "o que fazemos do mundo". É o processo de transformar o "dado" (a criação natural) em algo "feito" (artefatos, instituições, linguagens). A cultura não é opcional; é uma consequência inevitável de sermos portadores da imagem de um Deus Criador.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🌍 Unidade 2: A origem da cultura no mandato cultural</h4><p class="text-gray-700">A cultura começa em Gênesis, com Adão nomeando os animais (Gênesis 2:19-20) e cultivando o jardim. A criatividade, a arte (Jubal, Gênesis 4:21) e a tecnologia (Tubalcaim, Gênesis 4:22) são expressões do mandato cultural, mesmo após a Queda.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🩻 Unidade 3: A corrupção da cultura pelo pecado</h4><p class="text-gray-700">Toda cultura humana está contaminada pelo pecado (Gênesis 6:5). Ela pode se tornar idolátrica, promovendo valores contrários a Deus. Nenhuma cultura é neutra. Como disse Francis Schaeffer (1912-1984), a cultura moderna reflete a "morte de Deus" em sua filosofia e arte.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">✝ Unidade 4: Redimindo a cultura – presença cristã no mundo</h4><p class="mb-2 text-gray-600">A tensão bíblica é viver "no mundo", mas não ser "do mundo" (João 17:15-18). Isso descarta duas posturas erradas: <strong>isolamento</strong> (fugir da cultura) e <strong>acomodação</strong> (ser assimilado por ela). A postura bíblica é de <strong>engajamento fiel</strong>, como embaixadores de Cristo (2 Coríntios 5:20), buscando transformar a cultura de dentro para fora.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">📱 Unidade 5: Cultura digital e a nova praça pública</h4><p class="text-gray-700">As redes sociais funcionam como uma nova ágora (praça pública), como a que Paulo encontrou em Atenas (Atos 17). Elas moldam nossa identidade, moralidade e política. O cristão deve usar essas ferramentas com discernimento, evitando seus ídolos (narcisismo, validação social) e usando-as para testemunhar a verdade.</p></div>
+                        <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md"><h3 class="text-2xl font-bold text-yellow-700 mb-4">📚 Conclusão do Módulo:</h3><p class="text-gray-700">O cristão não se retira da cultura, mas a examina criticamente (1 Tessalonicenses 5:21), rejeita o que é mau, retém o que é bom, e trabalha para criar uma cultura que reflita a beleza, a verdade e a bondade do Reino de Deus.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg"><h3 class="text-2xl font-bold text-blue-600 mb-4">⭐ Atividades Sugeridas</h3><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Análise Cultural:</strong> Escolha uma música popular e analise: Qual visão de mundo ela promove? Quais valores comunica?</li><li><strong>Discussão Bíblica:</strong> Como Paulo interage com a cultura de Atenas em Atos 17:16-34? O que ele afirma, o que ele corrige e como ele usa a própria cultura deles para pregar?</li></ul></div>
+                    </div>`
             },
+            // Módulo 5
             {
-                id: 5,
-                category: "Fundamentos",
-                question: "Qual a diferença entre cooperação e competição como processos sociais?",
-                answer: "Cooperação é a ação conjunta para alcançar objetivos comuns, promovendo união. Competição é a disputa por recursos escassos, onde o sucesso de um implica na desvantagem de outro.",
-                difficulty: "intermediario",
-                tags: ["processos", "interação"]
+                title: "Identidade, Relacionamentos e Comunidade",
+                emoji: "📘",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3><p class="text-gray-700">Confrontar a crise de identidade moderna com a antropologia bíblica, explorando a identidade como um dom de Deus, a natureza relacional do ser humano e o papel da igreja como comunidade redentora.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🔑 Unidade 1: A Imago Dei e a Dignidade da Pessoa</h4><p class="text-gray-700">A cultura moderna, como analisado por Carl Trueman em "A Ascensão e o Triunfo do Eu Moderno", promove o "eu psicológico" e o "individualismo expressivo", onde a identidade é autoconstruída e a autenticidade é a fidelidade aos próprios sentimentos. A resposta bíblica é que nossa identidade fundamental é recebida: somos criaturas feitas à imagem de Deus. Nossa verdadeira identidade não é descoberta olhando para dentro, mas olhando para cima, para nosso Criador, e para Cristo, em quem somos recriados (Colossenses 3:10).</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🤝 Unidade 2: Relações interpessoais e estrutura relacional</h4><p class="text-gray-700">O Deus triúno é relacional. Fomos criados para viver em comunhão (Gênesis 2:18). O pecado rompeu essas relações, criando alienação de Deus, de si mesmo, dos outros e da criação (Gênesis 3). A redenção em Cristo restaura a comunhão (Efésios 2:13-19).</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🫂 Unidade 3: Comunidade, mutualidade e vida em aliança</h4><p class="text-gray-700">A vida cristã é vivida em comunidade. O Novo Testamento está repleto de mandatos de "uns aos outros": "amai-vos uns aos outros" (João 13:34), "levai as cargas uns dos outros" (Gálatas 6:2), "perdoai-vos uns aos outros" (Efésios 4:32). Como Paul Tripp argumenta em "Instrumentos nas Mãos do Redentor", Deus nos usa como ferramentas de graça na vida uns dos outros.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🧬 Unidade 4: Sexualidade, gênero e relacionamentos redimidos</h4><p class="text-gray-700">A Bíblia apresenta a sexualidade como parte da boa criação, designada para a aliança do casamento entre um homem e uma mulher (Gênesis 2:24; Mateus 19:4-6). Nosso corpo não é uma propriedade para ser usada como quisermos, mas um templo do Espírito Santo, e devemos glorificar a Deus com ele (1 Coríntios 6:19-20).</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🏘 Unidade 5: A Igreja como verdadeira comunidade alternativa</h4><p class="text-gray-700">A igreja é chamada a ser uma comunidade contra-cultural (1 Pedro 2:9-12), onde as barreiras sociais são derrubadas pela cruz (Gálatas 3:28) e a unidade é vivida na diversidade. Ela ensina e manifesta o que a sociedade perdeu: comunhão verdadeira, propósito eterno e identidade sólida.</p></div>
+                        <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md"><h3 class="text-2xl font-bold text-yellow-700 mb-4">📚 Conclusão do Módulo:</h3><p class="text-gray-700">Em um mundo de identidades fragmentadas e relacionamentos superficiais, a igreja é chamada a ser uma comunidade alternativa que demonstra a beleza da identidade encontrada em Cristo, da comunhão restaurada pela cruz e do propósito eterno que recebemos de Deus.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg"><h3 class="text-2xl font-bold text-blue-600 mb-4">⭐ Atividades Sugeridas</h3><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Estudo Bíblico:</strong> Leia Efésios 2:11-22. Quais barreiras Cristo derrubou? Como isso afeta nossas relações na igreja e no mundo?</li><li><strong>Reflexão Escrita:</strong> Como sua igreja pode ser uma comunidade mais redentora e acolhedora em um mundo de identidades fragmentadas?</li></ul></div>
+                    </div>`
             },
+            // Módulo 6
             {
-                id: 6,
-                category: "Fundamentos",
-                question: "O que são fatores de mudança social?",
-                answer: "São elementos que impulsionam transformações na sociedade: demográficos (população), culturais (valores), tecnológicos (inovações), econômicos (crises), políticos (reformas) e ambientais (clima).",
-                difficulty: "avancado",
-                tags: ["mudança", "fatores"]
+                title: "Justiça, Poder e o Estado",
+                emoji: "📘",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3><p class="text-gray-700">Apresentar uma teologia bíblica do Estado, da autoridade e da justiça, contrastando a justiça de Deus com as ideologias seculares de justiça social.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🔑 Unidade 1: Deus é o soberano sobre todas as autoridades</h4><p class="text-gray-700">A Bíblia é clara que "não há autoridade que não venha de Deus; e as que existem foram ordenadas por Deus" (Romanos 13:1). Isso se aplica a todos os governantes, desde o Faraó do Egito (Romanos 9:17) até César em Roma. Portanto, toda autoridade humana é delegada, limitada e deve prestar contas a Deus.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">⚖ Unidade 2: A justiça como reflexo do caráter de Deus</h4><p class="text-gray-700">A justiça não é uma construção social, mas um atributo do caráter de Deus (Deuteronômio 32:4). A Bíblia nos chama a "praticar a justiça, amar a misericórdia e andar humildemente com o nosso Deus" (Miqueias 6:8). A justiça bíblica inclui tanto a punição do mal (justiça retributiva) quanto o cuidado dos vulneráveis (justiça distributiva), mas não se confunde com o igualitarismo forçado de ideologias como o marxismo.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🏛 Unidade 3: O papel legítimo do Estado</h4><p class="text-gray-700">As funções do Estado, segundo a Bíblia, são manter a ordem civil (Gênesis 9:6), punir o malfeitor e proteger o que faz o bem (Romanos 13:1-7), e promover um ambiente de paz para que a igreja possa florescer (1 Timóteo 2:1-2). O Estado não deve usurpar as funções da família ou da igreja (soberania das esferas).</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🧨 Unidade 4: Distorções do poder na sociedade moderna</h4><p class="text-gray-700">As distorções incluem o totalitarismo (o Estado como salvador) e a anarquia moral (rejeição de toda autoridade). A justiça ideológica redefine o certo e o errado com base em interesses de grupo, em vez da lei de Deus. Como John MacArthur afirma em "Sociedade Sem Pecado", o colapso da consciência coletiva resulta da rejeição da autoridade divina.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">✝ Unidade 5: O cristão como cidadão do Reino de Deus</h4><p class="text-gray-700">O cristão vive com uma dupla cidadania, como Agostinho descreveu em "A Cidade de Deus". Somos cidadãos de uma pátria terrena e devemos "dar a César o que é de César" (Mateus 22:21). Mas nossa lealdade final é ao Reino dos Céus, e devemos "dar a Deus o que é de Deus". Quando a lei do Estado entra em conflito com a lei de Deus, "importa obedecer a Deus do que aos homens" (Atos 5:29).</p></div>
+                        <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md"><h3 class="text-2xl font-bold text-yellow-700 mb-4">📚 Conclusão do Módulo:</h3><p class="text-gray-700">O Estado é um servo de Deus para o bem, mas pode se tornar uma besta idólatra quando exige lealdade absoluta. O cristão participa da esfera pública com sabedoria, orando pelos governantes (1 Timóteo 2:1-2), cumprindo as leis justas e testemunhando profeticamente contra a injustiça.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg"><h3 class="text-2xl font-bold text-blue-600 mb-4">⭐ Atividades Sugeridas</h3><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Discussão Bíblica:</strong> Leia Romanos 13:1-7 e 1 Pedro 2:13-17. Quais os limites da obediência civil?</li><li><strong>Análise Crítica:</strong> Avalie como o Estado brasileiro tem agido em relação à liberdade religiosa. Ele tem protegido essa liberdade ou a restringido?</li></ul></div>
+                    </div>`
             },
+            // Módulo 7
             {
-                id: 7,
-                category: "Fundamentos",
-                question: "O que é estratificação social?",
-                answer: "É a forma como as sociedades são organizadas em camadas hierárquicas baseadas em critérios como riqueza, poder, prestígio e educação, resultando em desigualdades no acesso a recursos.",
-                difficulty: "basico",
-                tags: ["estratificação", "desigualdade"]
+                title: "Desafios Contemporâneos à Luz da Verdade Bíblica",
+                emoji: "📘",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3><p class="text-gray-700">Analisar criticamente as principais ideologias do século XXI (relativismo, progressismo, secularismo) à luz da verdade bíblica, equipando o cristão para uma resposta fiel.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🔑 Unidade 1: A negação da verdade objetiva</h4><p class="text-gray-700">O pós-modernismo, influenciado por pensadores como Friedrich Nietzsche (1844-1900), nega a existência de metanarrativas ou verdades universais. A resposta cristã é que a verdade não é uma construção humana, mas uma pessoa: Jesus Cristo, que é "o caminho, a verdade e a vida" (João 14:6). A verdade de Deus é absoluta e revelada nas Escrituras.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🧬 Unidade 2: A crise de identidade e o culto ao eu</h4><p class="text-gray-700">A cultura atual promove a autodefinição radical ("sou o que sinto"). A antropologia reformada responde que o homem é criatura, não criador de si mesmo. A verdadeira identidade é um dom de Deus, encontrada em Cristo (Colossenses 3:1-4). A negação disso gera confusão, insegurança e desesperança.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🧨 Unidade 3: O avanço do secularismo e a exclusão de Deus</h4><p class="text-gray-700">O laicismo agressivo busca banir a fé da esfera pública, reduzindo-a a uma questão privada. Isso leva a leis contrárias à moral revelada (aborto, redefinição de família) e à perseguição sutil da fé. A resposta cristã é defender a liberdade religiosa e testemunhar publicamente a verdade com graça e coragem (1 Pedro 3:15).</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">⚔ Unidade 4: Ideologias e militâncias como novas religiões</h4><p class="text-gray-700">Movimentos como o marxismo cultural, a teoria crítica da raça e a ideologia de gênero funcionam como "religiões seculares". Eles oferecem uma narrativa de criação (o mundo é dividido em opressores e oprimidos), queda (o pecado original da opressão sistêmica), salvação (a libertação através do ativismo e da desconstrução do poder) e escatologia (uma utopia terrena de equidade total). O evangelho oferece uma narrativa superior e verdadeira.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">✝ Unidade 5: A firmeza da Igreja em meio ao colapso cultural</h4><p class="text-gray-700">O chamado bíblico é não se conformar com o mundo (Romanos 12:2), mas permanecer na verdade (2 Timóteo 4:2-5), sofrendo com fidelidade se necessário (2 Timóteo 3:12). A igreja deve equipar seus membros para resistir à pressão cultural através do conhecimento profundo da Palavra e de uma vida comunitária autêntica.</p></div>
+                        <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md"><h3 class="text-2xl font-bold text-yellow-700 mb-4">📚 Conclusão do Módulo:</h3><p class="text-gray-700">Os desafios contemporâneos são fundamentalmente espirituais. A resposta da Igreja não é o pânico ou a acomodação, mas a fidelidade corajosa à Palavra de Deus, "não nos conformando com este mundo, mas nos transformando pela renovação da nossa mente" (Romanos 12:2).</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg"><h3 class="text-2xl font-bold text-blue-600 mb-4">⭐ Atividades Sugeridas</h3><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Debate:</strong> Qual é o maior desafio cultural ao cristianismo em sua realidade local? Como enfrentá-lo biblicamente?</li><li><strong>Estudo Bíblico:</strong> Leia João 17:14-19. Qual a relação do cristão com o "mundo" nesse texto?</li></ul></div>
+                    </div>`
             },
+            // Módulo 8
             {
-                id: 8,
-                category: "Teologia Reformada",
-                question: "Como a cosmovisão reformada vê o engajamento político?",
-                answer: "A cosmovisão reformada defende que Deus é soberano sobre todas as esferas, incluindo a política. Os cristãos devem se engajar ativamente na política para promover justiça e bem comum.",
-                difficulty: "avancado",
-                tags: ["política", "engajamento"]
+                title: "Igreja, Vocação e Transformação Social",
+                emoji: "📘",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3><p class="text-gray-700">Compreender como o evangelho transforma a sociedade através da igreja como comunidade contra-cultural e da vida vocacional fiel de cada cristão no mundo.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🔑 Unidade 1: A Igreja como comunidade contra-cultural</h4><p class="text-gray-700">A igreja é o povo santo de Deus, separado do mundo para ser luz e sal (1 Pedro 2:9-12; Mateus 5:13-16). Sua missão principal é espiritual: anunciar o evangelho (Mateus 28:18-20). No entanto, como Michael Horton argumenta em "O Cristão e a Cultura", a igreja é um sinal visível do Reino, onde a nova criação já é antecipada.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🛠 Unidade 2: A vocação como serviço a Deus no mundo</h4><p class="text-gray-700">A Reforma Protestante, especialmente através de Martinho Lutero (1483-1546) e João Calvino, resgatou a doutrina da vocação. Todo trabalho legítimo, do agricultor ao magistrado, é um chamado divino e uma oportunidade de servir a Deus e ao próximo. A excelência e a integridade no trabalho são atos de adoração. "Tudo o que fizerdes, fazei-o de todo o coração, como para o Senhor e não para homens" (Colossenses 3:23).</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🏙 Unidade 3: A transformação social segundo o evangelho</h4><p class="text-gray-700">A transformação social não é o evangelho, mas é um fruto do evangelho. A missão primária da igreja é a pregação da Palavra e a administração dos sacramentos. No entanto, à medida que as pessoas são transformadas pelo evangelho, elas inevitavelmente impactam suas famílias, locais de trabalho e comunidades, promovendo justiça, compaixão e beleza.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">✝ Unidade 4: A presença fiel nas esferas públicas</h4><p class="text-gray-700">Cristãos são chamados a impactar todas as áreas: na educação, ensinando sob a autoridade da verdade; na ciência, investigando com reverência (Provérbios 25:2); na política, buscando o bem comum (Miqueias 6:8); e nas artes, produzindo beleza e verdade. José no Egito (Gênesis 41) e Daniel na Babilônia (Daniel 1-6) são modelos de fidelidade em culturas pagãs.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">⛪ Unidade 5: Esperança escatológica e perseverança</h4><p class="text-gray-700">Vivemos na tensão do "já e ainda não". Cristo já reina, mas seu Reino ainda não foi plenamente consumado (1 Coríntios 15:25-28). Portanto, trabalhamos pela transformação social com perseverança, sem a ilusão de construir uma utopia na terra, mas com a esperança certa da nova criação que está por vir (Apocalipse 21:1).</p></div>
+                        <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md"><h3 class="text-2xl font-bold text-yellow-700 mb-4">📚 Conclusão do Módulo:</h3><p class="text-gray-700">A igreja é a embaixada do Reino de Deus, e cada cristão é um servo fiel em todas as esferas da vida. A transformação social começa no coração e se manifesta na fidelidade vocacional, no testemunho público e na esperança viva do Reino vindouro.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-lg"><h3 class="text-2xl font-bold text-blue-600 mb-4">⭐ Atividades Sugeridas</h3><ul class="list-disc list-inside space-y-2 text-gray-700"><li><strong>Mapeamento Vocacional:</strong> Reflita sobre sua vocação atual. Como ela pode glorificar a Deus e servir ao próximo?</li><li><strong>Debate:</strong> A igreja deve se envolver em causas sociais? Em que termos e com quais limites?</li></ul></div>
+                    </div>`
             },
+            // Módulo 9
             {
-                id: 9,
-                category: "Fundamentos",
-                question: "Qual a diferença entre grupos primários e secundários?",
-                answer: "Grupos primários têm relações íntimas e pessoais (família, amigos). Grupos secundários têm relações formais e instrumentais focadas em objetivos específicos (empresas, partidos).",
-                difficulty: "intermediario",
-                tags: ["grupos", "relações"]
+                title: "Projeto Final: Discernimento e Fidelidade",
+                emoji: "📘",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3><p class="text-gray-700">Consolidar os conteúdos aprendidos, aplicando a cosmovisão cristã reformada à análise de um fenômeno social, cultural ou institucional contemporâneo.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🔑 Unidade 1: Propósito do projeto final</h4><p class="text-gray-700">O projeto final visa estimular a reflexão crítica, exercitar a análise sociológica cristã e desenvolver respostas práticas e bíblicas aos desafios contemporâneos, aplicando os conceitos de cultura, vocação, justiça e identidade.</p></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🛠 Unidade 2: Formatos sugeridos de projeto</h4><p class="text-gray-700">Escolha um formato:</p><div class="grid md:grid-cols-2 gap-4 mt-4"><div class="p-4 bg-blue-50 border border-blue-200 rounded-lg"><strong>1. Análise cultural crítica:</strong> Analise um filme (ex: "Matrix"), uma série (ex: "Black Mirror") ou uma tendência musical, identificando a cosmovisão subjacente.</div><div class="p-4 bg-green-50 border border-green-200 rounded-lg"><strong>2. Estudo de caso sociológico:</strong> Analise uma questão social (ex: a crise da saúde mental entre jovens, o debate sobre inteligência artificial) à luz do modelo Criação-Queda-Redenção.</div><div class="p-4 bg-yellow-50 border border-yellow-200 rounded-lg"><strong>3. Projeto vocacional redentor:</strong> Descreva como um profissional cristão (médico, professor, programador, artista) pode exercer sua vocação de forma redentora.</div><div class="p-4 bg-red-50 border border-red-200 rounded-lg"><strong>4. Plano de ação para igreja local:</strong> Proponha como sua igreja pode responder a um desafio local (ex: pobreza, desintegração familiar) de forma biblicamente fiel.</div></div></div>
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h4 class="text-xl font-bold text-green-600 mb-4">🧠 Unidade 3: Critérios de avaliação</h4><p class="text-gray-700">Os projetos serão avaliados com base em: Fidelidade bíblica, Clareza e estrutura, Engajamento com a cultura, Aplicabilidade e Originalidade.</p></div>
+                        <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md"><h3 class="text-2xl font-bold text-yellow-700 mb-4">📚 Conclusão do Curso:</h3><p class="text-gray-700">Que este curso seja um ponto de partida para uma vida inteira de pensamento crítico e engajamento fiel, para a glória de Deus e o bem do próximo.</p><blockquote class="mt-4 p-4 text-center text-gray-600 italic">“Tudo quanto fizerdes, fazei-o de coração, como para o Senhor.” (Colossenses 3:23)</blockquote></div>
+                    </div>`
             },
+            // Módulo 10
             {
-                id: 10,
-                category: "Problemas Sociais",
-                question: "Como a Teologia Reformada aborda a corrupção?",
-                answer: "A corrupção é vista como manifestação da depravação humana. A resposta inclui transformação de corações, reforma de estruturas e engajamento ativo na promoção da integridade e transparência.",
-                difficulty: "avancado",
-                tags: ["corrupção", "ética"]
+                title: "Referências Consultadas",
+                emoji: "📘",
+                content: `
+                    <div class="space-y-8">
+                        <div class="p-6 bg-white rounded-xl shadow-md"><h3 class="text-2xl font-bold text-blue-600 mb-2">🎯 Objetivo do Módulo:</h3><p class="text-gray-700">Apresentar as principais obras que fundamentaram o curso, com comentários sobre sua relevância.</p></div>
+                        <div class="space-y-4">
+                            <div class="p-4 bg-white rounded-xl shadow-md"><h4 class="font-bold text-lg text-gray-800">📚 1. Vern S. Poythress</h4><p class="text-sm text-gray-600 mt-1">📖 <i>Redeeming Sociology (2011)</i>, <i>Redimindo a Filosofia</i>, <i>Redimindo a Ciência</i> - Obras centrais para uma abordagem redentora das ciências humanas e naturais.</p></div>
+                            <div class="p-4 bg-white rounded-xl shadow-md"><h4 class="font-bold text-lg text-gray-800">📚 2. Francis Schaeffer (1912-1984)</h4><p class="text-sm text-gray-600 mt-1">📖 <i>Como Viveremos?</i> - Análise histórica e apologética da cultura ocidental.</p></div>
+                            <div class="p-4 bg-white rounded-xl shadow-md"><h4 class="font-bold text-lg text-gray-800">📚 3. John MacArthur</h4><p class="text-sm text-gray-600 mt-1">📖 <i>Nossa Suficiência em Cristo</i>, <i>Sociedade Sem Pecado</i> - Defesa da suficiência das Escrituras e crítica à secularização da moralidade.</p></div>
+                            <div class="p-4 bg-white rounded-xl shadow-md"><h4 class="font-bold text-lg text-gray-800">📚 4. A.W. Pink (1886-1952)</h4><p class="text-sm text-gray-600 mt-1">📖 <i>Deus é Soberano</i> - Obra clássica sobre a soberania de Deus em todas as áreas.</p></div>
+                            <div class="p-4 bg-white rounded-xl shadow-md"><h4 class="font-bold text-lg text-gray-800">📚 5. Michael Horton</h4><p class="text-sm text-gray-600 mt-1">📖 <i>O Cristão e a Cultura</i> - Defesa de uma presença cristã no mundo que evita o triunfalismo e o pietismo.</p></div>
+                            <div class="p-4 bg-white rounded-xl shadow-md"><h4 class="font-bold text-lg text-gray-800">📚 6. Carl R. Trueman</h4><p class="text-sm text-gray-600 mt-1">📖 <i>A Ascensão e o Triunfo do Eu Moderno</i>, <i>O Imperativo Confessional</i> - Análise crucial da crise de identidade contemporânea e da necessidade de uma fé confessional.</p></div>
+                            <div class="p-4 bg-white rounded-xl shadow-md"><h4 class="font-bold text-lg text-gray-800">📚 7. Albert Wolters</h4><p class="text-sm text-gray-600 mt-1">📖 <i>A Criação Restaurada</i> - Excelente introdução à estrutura Criação, Queda e Redenção.</p></div>
+                            <div class="p-4 bg-white rounded-xl shadow-md"><h4 class="font-bold text-lg text-gray-800">📚 8. Paul David Tripp</h4><p class="text-sm text-gray-600 mt-1">📖 <i>Instrumentos nas Mãos do Redentor</i> - Aplicação da antropologia bíblica às relações interpessoais.</p></div>
+                            <div class="p-4 bg-white rounded-xl shadow-md"><h4 class="font-bold text-lg text-gray-800">📚 9. Fontes Clássicas e Complementares</h4><p class="text-sm text-gray-600 mt-1">📖 <i>Bíblia Sagrada</i>; <i>Institutas da Religião Cristã</i> (João Calvino, 1536); <i>A Cidade de Deus</i> (Agostinho, c. 426); Textos de Abraham Kuyper (1837-1920) e Herman Dooyeweerd (1894-1977).</p></div>
+                        </div>
+                        <div class="p-6 bg-yellow-50 border border-yellow-300 rounded-xl shadow-md"><h3 class="text-2xl font-bold text-yellow-700 mb-4">🧭 Direcionamento final ao aluno:</h3><p class="text-gray-700">Estas obras são guias, mas a Escritura é a autoridade final. Use cada leitura com discernimento, oração e o desejo de glorificar a Deus em tudo.</p><blockquote class="mt-4 p-4 text-center text-gray-600 italic">“Examinai tudo. Retende o que é bom.” (1 Tessalonicenses 5:21)</blockquote></div>
+                    </div>`
             }
         ];
 
-        const quizData = [
-            {
-                id: 1,
-                category: "Fundamentos da Sociologia",
-                question: "Quem é considerado o fundador da Sociologia?",
-                options: ["Karl Marx", "Auguste Comte", "Max Weber", "Émile Durkheim"],
-                correct: 1,
-                explanation: "Auguste Comte é considerado o fundador da Sociologia, tendo cunhado o termo e proposto o positivismo como método de estudo da sociedade.",
-                difficulty: "Básico",
-                points: 10
-            },
-            {
-                id: 2,
-                category: "Teologia Reformada",
-                question: "Qual dos seguintes NÃO é um dos cinco pontos do Calvinismo?",
-                options: ["Depravação Total", "Eleição Incondicional", "Livre Arbítrio", "Perseverança dos Santos"],
-                correct: 2,
-                explanation: "O Livre Arbítrio não é um dos cinco pontos do Calvinismo. Os cinco pontos são: Depravação Total, Eleição Incondicional, Expiação Limitada, Graça Irresistível e Perseverança dos Santos.",
-                difficulty: "Intermediário",
-                points: 15
-            },
-            {
-                id: 3,
-                category: "Problemas Sociais",
-                question: "Segundo a perspectiva reformada, qual é a causa fundamental da pobreza?",
-                options: ["Falta de educação", "Sistemas econômicos injustos", "O pecado e a Queda", "Falta de oportunidades"],
-                correct: 2,
-                explanation: "Na perspectiva reformada, a pobreza é vista como consequência da Queda e do pecado humano, embora isso não exclua a responsabilidade de combater suas manifestações estruturais.",
-                difficulty: "Intermediário",
-                points: 15
-            },
-            {
-                id: 4,
-                category: "Fundamentos da Sociologia",
-                question: "Qual instituição social é responsável pela socialização primária?",
-                options: ["Escola", "Igreja", "Família", "Estado"],
-                correct: 2,
-                explanation: "A família é a instituição responsável pela socialização primária, moldando os valores e comportamentos básicos dos indivíduos desde a infância.",
-                difficulty: "Básico",
-                points: 10
-            },
-            {
-                id: 5,
-                category: "Fundamentos da Sociologia",
-                question: "Qual processo social envolve a adaptação mútua para permitir coexistência?",
-                options: ["Cooperação", "Competição", "Acomodação", "Conflito"],
-                correct: 2,
-                explanation: "A acomodação é o processo pelo qual indivíduos ou grupos ajustam suas relações para reduzir o conflito e encontrar um modus vivendi.",
-                difficulty: "Intermediário",
-                points: 15
-            },
-            {
-                id: 6,
-                category: "Fundamentos da Sociologia",
-                question: "O que caracteriza um sistema de castas?",
-                options: ["Alta mobilidade social", "Sistema fechado e hereditário", "Baseado apenas na riqueza", "Temporário e flexível"],
-                correct: 1,
-                explanation: "O sistema de castas é caracterizado por ser fechado, hereditário, baseado no nascimento e com pouca ou nenhuma mobilidade social.",
-                difficulty: "Básico",
-                points: 10
-            },
-            {
-                id: 7,
-                category: "Teologia Reformada",
-                question: "Qual teórico desenvolveu a teoria da 'Ética Protestante e o Espírito do Capitalismo'?",
-                options: ["Karl Marx", "Max Weber", "Émile Durkheim", "Auguste Comte"],
-                correct: 1,
-                explanation: "Max Weber desenvolveu esta teoria, analisando como a ética protestante (especialmente calvinista) contribuiu para o desenvolvimento do capitalismo.",
-                difficulty: "Intermediário",
-                points: 15
-            },
-            {
-                id: 8,
-                category: "Fundamentos da Sociologia",
-                question: "Qual é a principal diferença entre grupo social e agregado social?",
-                options: ["O tamanho do grupo", "A localização geográfica", "A intensidade da interação", "A idade dos membros"],
-                correct: 2,
-                explanation: "A principal diferença está na intensidade da interação: grupos sociais têm interação contínua e significativa, enquanto agregados sociais têm interação mínima e superficial.",
-                difficulty: "Intermediário",
-                points: 15
-            },
-            {
-                id: 9,
-                category: "Teologia Reformada",
-                question: "Como a cosmovisão reformada vê o engajamento político dos cristãos?",
-                options: ["Deve ser evitado completamente", "Apenas em questões religiosas", "Engajamento ativo em todas as esferas", "Somente através da igreja"],
-                correct: 2,
-                explanation: "A cosmovisão reformada defende que Deus é soberano sobre todas as esferas da vida, incluindo a política, e os cristãos devem se engajar ativamente para promover justiça.",
-                difficulty: "Avançado",
-                points: 20
-            },
-            {
-                id: 10,
-                category: "Problemas Sociais",
-                question: "Qual é a abordagem reformada para combater a corrupção?",
-                options: ["Apenas punição legal", "Somente educação moral", "Transformação de corações e estruturas", "Ignorar o problema"],
-                correct: 2,
-                explanation: "A abordagem reformada para a corrupção inclui tanto a transformação de corações (arrependimento individual) quanto a reforma de estruturas sociais que permitem a corrupção.",
-                difficulty: "Avançado",
-                points: 20
-            }
-        ];
+        // --- DOM ELEMENTS ---
+        const sidebar = document.getElementById('sidebar');
+        const menuNav = sidebar.querySelector('nav ul');
+        const contentArea = document.getElementById('content-area');
+        const menuToggle = document.getElementById('menu-toggle');
+        const overlay = document.getElementById('overlay');
+        const mobileHeaderTitle = document.getElementById('mobile-header-title');
 
-        const contentData = {
-            fundamentos: {
-                title: "Fundamentos da Sociologia",
-                difficulty: "Básico",
-                readTime: "15 min",
-                content: `
-                    <h3>Significado e História da Sociologia</h3>
-                    <p>A <span class="highlight">Sociologia</span> pode ser definida como a ciência que estuda a sociedade em sua totalidade, buscando compreender as interações humanas, as <span class="highlight">estruturas sociais</span>, os processos de mudança e as formas de organização coletiva. Ela se debruça sobre questões como a formação de grupos, a estratificação social, o poder, a cultura, as normas e os valores que orientam o comportamento humano.</p>
-                    
-                    <p>Historicamente, o surgimento da Sociologia está intrinsecamente ligado ao contexto de crise e reestruturação social do século XIX. Pensadores como <span class="highlight">Auguste Comte</span>, <span class="highlight">Émile Durkheim</span>, <span class="highlight">Karl Marx</span> e <span class="highlight">Max Weber</span> são considerados os pais fundadores da disciplina, cada um contribuindo com perspectivas teóricas e metodológicas distintas que moldaram o campo.</p>
-                    
-                    <h3>Comparação com Outras Ciências Sociais</h3>
-                    <p>A Sociologia compartilha fronteiras e dialoga com diversas outras ciências sociais, mas se distingue delas por seu foco e abordagem:</p>
-                    
-                    <p><strong>Antropologia:</strong> Enquanto a Antropologia tradicionalmente se concentra no estudo das culturas humanas, especialmente as não ocidentais, e na diversidade cultural, a Sociologia tende a analisar as sociedades complexas e as estruturas sociais modernas.</p>
-                    
-                    <p><strong>Ciência Política:</strong> A Ciência Política estuda o poder, o Estado, os sistemas de governo e as relações políticas. A Sociologia, por sua vez, analisa as bases sociais do poder, a participação política, os movimentos sociais e a influência das estruturas sociais nas decisões políticas.</p>
-                    
-                    <p><strong>Economia:</strong> A Economia se dedica ao estudo da produção, distribuição e consumo de bens e serviços. A Sociologia econômica investiga as relações sociais que permeiam as atividades econômicas, a estratificação social baseada na riqueza, o impacto das políticas econômicas na sociedade e a cultura do consumo.</p>
-                `,
-                keyTerms: ["Sociologia", "estruturas sociais", "estratificação social", "Auguste Comte", "Max Weber"]
-            },
-            problemas: {
-                title: "A Teologia Reformada e os Problemas Sociais",
-                difficulty: "Intermediário",
-                readTime: "25 min",
-                content: `
-                    <h3>Pobreza</h3>
-                    <p>A <span class="highlight">pobreza</span> é um fenômeno complexo, com dimensões econômicas, sociais e espirituais. A Teologia Reformada, embora por vezes associada à ética do trabalho e ao desenvolvimento econômico (como analisado por <span class="highlight">Max Weber</span> em "A Ética Protestante e o Espírito do Capitalismo"), não ignora a realidade da pobreza, mas a aborda a partir de seus próprios pressupostos teológicos e sociológicos.</p>
-                    
-                    <p>Para a Teologia Reformada, a pobreza, assim como outras formas de injustiça e sofrimento, é vista como uma consequência da <span class="highlight">Queda</span> e do pecado humano. O pecado distorceu as relações humanas, a criação e a própria economia, levando à ganância, exploração e desigualdade.</p>
-                    
-                    <p>A <span class="highlight">soberania de Deus</span> se estende sobre todas as coisas, inclusive sobre a riqueza e a pobreza. A riqueza não é um sinal automático de virtude, nem a pobreza de maldição. No entanto, a Teologia Reformada enfatiza a <span class="highlight">mordomia cristã</span>, ou seja, a responsabilidade de usar os recursos (bens, talentos, tempo) para a glória de Deus e o bem do próximo.</p>
-                    
-                    <h3>Preconceito e Educação</h3>
-                    <p>O <span class="highlight">preconceito</span>, em suas diversas manifestações (racismo, xenofobia, discriminação de gênero, social, religiosa, etc.), é uma chaga social que desafia os princípios de justiça e dignidade humana. A Teologia Reformada, com sua ênfase na <span class="highlight">imago Dei</span> (imagem de Deus) em cada ser humano e na depravação total que afeta todas as esferas da vida, oferece uma base teológica para combater o preconceito e promover uma educação que valorize a diversidade e a inclusão.</p>
-                    
-                    <p>A doutrina reformada ensina que todos os seres humanos, independentemente de raça, etnia, gênero, status social ou qualquer outra característica, são criados à <span class="highlight">imagem e semelhança de Deus</span> (Gênesis 1:27). Isso confere a cada indivíduo uma dignidade intrínseca e um valor inestimável. O preconceito, ao desumanizar ou inferiorizar o outro, é uma afronta direta à imago Dei e, portanto, um pecado contra Deus e contra o próximo.</p>
-                    
-                    <h3>Corrupção</h3>
-                    <p>A <span class="highlight">corrupção</span> é vista como manifestação da depravação humana. A resposta inclui transformação de corações, reforma de estruturas e engajamento ativo na promoção da integridade e transparência.</p>
-                    
-                    <h3>Política</h3>
-                    <p>A relação entre Teologia Reformada e <span class="highlight">política</span> é complexa e tem sido objeto de debate ao longo dos séculos. A cosmovisão reformada defende que Deus é soberano sobre todas as esferas da vida, incluindo a política, e os cristãos devem se engajar ativamente para promover justiça e bem comum.</p>
-                `,
-                keyTerms: ["pobreza", "justiça social", "mordomia", "imago Dei", "corrupção", "política", "soberania de Deus"]
-            },
-            instituicoes: {
-                title: "Instituições e Processos Sociais",
-                difficulty: "Intermediário",
-                readTime: "20 min",
-                content: `
-                    <h3>As Instituições Sociais</h3>
-                    <p>As <span class="highlight">instituições sociais</span> são estruturas organizadas de padrões de comportamento e crenças que regulam a vida social e satisfazem as necessidades básicas da sociedade. Elas são fundamentais para a manutenção da ordem social e para a transmissão da cultura.</p>
-                    
-                    <p>As principais instituições sociais incluem:</p>
-                    
-                    <p><strong>Família:</strong> A instituição primária, responsável pela <span class="highlight">socialização</span> inicial, reprodução e cuidado dos membros.</p>
-                    
-                    <p><strong>Educação:</strong> Transmite conhecimentos, valores e habilidades, preparando os indivíduos para a vida em sociedade.</p>
-                    
-                    <p><strong>Religião:</strong> Oferece sistemas de crenças, rituais e moralidade, fornecendo sentido e coesão social.</p>
-                    
-                    <p><strong>Economia:</strong> Organiza a produção e distribuição de bens e serviços.</p>
-                    
-                    <p><strong>Política/Estado:</strong> Estabelece e mantém a ordem, regula as relações sociais e exerce o poder.</p>
-                    
-                    <h3>Os Processos Sociais Básicos</h3>
-                    <p>Os <span class="highlight">processos sociais</span> são as formas dinâmicas e recorrentes pelas quais os indivíduos e grupos interagem uns com os outros, estabelecendo relações e moldando a estrutura social.</p>
-                    
-                    <p><strong>Processos Associativos:</strong></p>
-                    
-                    <p><strong>Cooperação:</strong> É a ação conjunta de indivíduos ou grupos para alcançar um objetivo comum. A <span class="highlight">cooperação</span> implica em trabalho em equipe, apoio mútuo e a busca por benefícios compartilhados.</p>
-                    
-                    <p><strong>Acomodação:</strong> Refere-se ao processo pelo qual indivíduos ou grupos ajustam suas relações para reduzir o conflito e encontrar um modus vivendi, mesmo que as diferenças subjacentes persistam.</p>
-                    
-                    <p><strong>Assimilação:</strong> É o processo pelo qual indivíduos ou grupos adquirem as características culturais de outro grupo social, tornando-se semelhantes e, eventualmente, integrando-se a ele.</p>
-                    
-                    <p><strong>Processos Dissociativos:</strong></p>
-                    
-                    <p><strong>Competição:</strong> É a disputa por recursos escassos, status, poder ou reconhecimento, onde o sucesso de um indivíduo ou grupo implica no fracasso ou na desvantagem de outro.</p>
-                    
-                    <p><strong>Conflito:</strong> É a forma mais intensa de processo dissociativo, caracterizada pela oposição direta e consciente entre indivíduos ou grupos que buscam atingir objetivos mutuamente exclusivos.</p>
-                `,
-                keyTerms: ["instituições sociais", "socialização", "processos sociais", "cooperação", "conflito", "ordem social"]
-            }
-        };
+        let activeModule = 0;
 
-        // State
-        let currentSection = 'home';
-        let currentFlashcard = 0;
-        let studiedCards = new Set();
-        let filteredFlashcards = [...flashcardsData];
-        let currentQuizQuestion = 0;
-        let quizScore = 0;
-        let quizAnswers = [];
-        let quizTimer = null;
-        let timeLeft = 30;
-        let quizStarted = false;
+        // --- FUNCTIONS ---
 
-        // Navigation
-        function showSection(section) {
-            // Hide all sections
-            document.querySelectorAll('.section-content').forEach(el => {
-                el.classList.add('hidden');
-            });
-            
-            // Show target section
-            document.getElementById(section + '-section').classList.remove('hidden');
-            
-            // Update nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            document.querySelector(`[data-section="${section}"]`).classList.add('active');
-            
-            currentSection = section;
-            
-            // Initialize section-specific content
-            if (section === 'content') {
-                loadContent('fundamentos');
-            } else if (section === 'flashcards') {
-                updateFlashcard();
-            }
+        /**
+         * Toggles the mobile menu visibility.
+         */
+        function toggleMenu() {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
         }
 
-        // Content Management
-        function loadContent(contentKey) {
-            const content = contentData[contentKey];
-            if (!content) return;
-            
-            document.getElementById('content-display').innerHTML = `
-                <div class="animate-fade-in">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
-                        <span class="badge badge-${content.difficulty === 'Básico' ? 'success' : content.difficulty === 'Intermediário' ? 'warning' : 'danger'}">${content.difficulty}</span>
-                        <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--secondary);">
-                            📄 <span>${content.readTime}</span>
-                        </div>
-                    </div>
-                    <h2 style="margin-bottom: 1rem;">${content.title}</h2>
-                    <div style="line-height: 1.8; font-size: 1.1rem;">
-                        ${content.content}
-                    </div>
-                    <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
-                    <div>
-                        <h4 style="margin-bottom: 1rem;">🏷️ Termos-chave:</h4>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            ${content.keyTerms.map(term => `<span class="badge" style="background: #e0e7ff; color: #3730a3;">${term}</span>`).join('')}
-                        </div>
-                    </div>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
-                        <button class="btn btn-secondary">⬅️ Seção Anterior</button>
-                        <span style="color: var(--secondary);">Seção ${Object.keys(contentData).indexOf(contentKey) + 1}</span>
-                        <button class="btn btn-secondary">Próxima Seção ➡️</button>
-                    </div>
-                </div>
-            `;
-            
-            // Update TOC
-            document.querySelectorAll('.toc-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            document.querySelector(`[data-content="${contentKey}"]`).classList.add('active');
-        }
+        /**
+         * Loads the content for a specific module.
+         * @param {number} index - The index of the module to load.
+         */
+        function loadModule(index) {
+            if (index < 0 || index >= modules.length) return;
 
-        // Flashcards
-        function updateFlashcard() {
-            if (filteredFlashcards.length === 0) return;
+            activeModule = index;
+            const module = modules[index];
             
-            const card = filteredFlashcards[currentFlashcard];
+            // Update content
+            contentArea.innerHTML = `<div class="content-module">${module.content}</div>`;
             
-            document.getElementById('flashcard-category-badge').textContent = card.category;
-            document.getElementById('flashcard-difficulty-badge').textContent = card.difficulty.charAt(0).toUpperCase() + card.difficulty.slice(1);
-            document.getElementById('flashcard-question').textContent = card.question;
-            document.getElementById('flashcard-answer').textContent = card.answer;
-            document.getElementById('flashcard-tags').textContent = card.tags.join(', ');
-            
-            // Update counter
-            document.getElementById('flashcard-counter').textContent = `${currentFlashcard + 1} de ${filteredFlashcards.length}`;
-            
-            // Update progress
-            updateFlashcardProgress();
-            
-            // Reset flip state
-            document.getElementById('flashcard').classList.remove('flipped');
-        }
+            // Update mobile header
+            mobileHeaderTitle.textContent = `Módulo ${index + 1}`;
 
-        function flipCard() {
-            const flashcard = document.getElementById('flashcard');
-            flashcard.classList.toggle('flipped');
-            
-            if (flashcard.classList.contains('flipped')) {
-                const cardId = filteredFlashcards[currentFlashcard].id;
-                studiedCards.add(cardId);
-                updateFlashcardProgress();
-            }
-        }
-
-        function nextCard() {
-            currentFlashcard = (currentFlashcard + 1) % filteredFlashcards.length;
-            updateFlashcard();
-        }
-
-        function previousCard() {
-            currentFlashcard = (currentFlashcard - 1 + filteredFlashcards.length) % filteredFlashcards.length;
-            updateFlashcard();
-        }
-
-        function resetFlashcards() {
-            studiedCards.clear();
-            currentFlashcard = 0;
-            updateFlashcard();
-        }
-
-        function updateFlashcardProgress() {
-            const studied = studiedCards.size;
-            const total = filteredFlashcards.length;
-            const percentage = Math.round((studied / total) * 100);
-            
-            document.getElementById('flashcard-progress').textContent = `${studied} de ${total}`;
-            document.getElementById('flashcard-percentage').textContent = `${percentage}%`;
-            document.getElementById('flashcard-progress-bar').style.width = `${percentage}%`;
-            
-            // Update stats
-            document.getElementById('total-cards').textContent = total;
-            document.getElementById('studied-cards').textContent = studied;
-            document.getElementById('progress-percentage').textContent = `${percentage}%`;
-        }
-
-        // Quiz
-        function startQuiz() {
-            document.getElementById('quiz-start').classList.add('hidden');
-            document.getElementById('quiz-game').classList.remove('hidden');
-            
-            currentQuizQuestion = 0;
-            quizScore = 0;
-            quizAnswers = [];
-            quizStarted = true;
-            
-            loadQuizQuestion();
-        }
-
-        function loadQuizQuestion() {
-            if (currentQuizQuestion >= quizData.length) {
-                endQuiz();
-                return;
-            }
-            
-            const question = quizData[currentQuizQuestion];
-            
-            document.getElementById('current-question').textContent = currentQuizQuestion + 1;
-            document.getElementById('total-questions').textContent = quizData.length;
-            document.getElementById('question-category').textContent = question.category;
-            document.getElementById('question-difficulty').textContent = `${question.difficulty} • ${question.points} pts`;
-            document.getElementById('question-text').textContent = question.question;
-            
-            // Load options
-            const optionsContainer = document.getElementById('quiz-options');
-            optionsContainer.innerHTML = '';
-            
-            question.options.forEach((option, index) => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'quiz-option';
-                optionElement.innerHTML = `
-                    <div style="display: flex; align-items: center; gap: 1rem;">
-                        <div style="width: 2rem; height: 2rem; border: 2px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold;">
-                            ${String.fromCharCode(65 + index)}
-                        </div>
-                        <span>${option}</span>
-                    </div>
-                `;
-                optionElement.onclick = () => selectAnswer(index);
-                optionsContainer.appendChild(optionElement);
-            });
-            
-            // Update progress
-            const progress = ((currentQuizQuestion + 1) / quizData.length) * 100;
-            document.getElementById('quiz-progress-bar').style.width = `${progress}%`;
-            
-            // Hide explanation and next button
-            document.getElementById('explanation-card').classList.add('hidden');
-            document.getElementById('next-button-container').classList.add('hidden');
-            
-            // Start timer
-            startTimer();
-        }
-
-        function selectAnswer(selectedIndex) {
-            if (!quizStarted) return;
-            
-            clearInterval(quizTimer);
-            
-            const question = quizData[currentQuizQuestion];
-            const isCorrect = selectedIndex === question.correct;
-            const points = isCorrect ? question.points : 0;
-            
-            quizScore += points;
-            quizAnswers.push({
-                questionId: question.id,
-                selected: selectedIndex,
-                correct: question.correct,
-                isCorrect,
-                points
-            });
-            
-            // Update score display
-            document.getElementById('current-score').textContent = quizScore;
-            
-            // Show results on options
-            const options = document.querySelectorAll('.quiz-option');
-            options.forEach((option, index) => {
-                option.onclick = null; // Disable clicking
-                if (index === question.correct) {
-                    option.classList.add('correct');
-                } else if (index === selectedIndex && !isCorrect) {
-                    option.classList.add('incorrect');
+            // Update active state in menu
+            const menuItems = menuNav.querySelectorAll('li a');
+            menuItems.forEach((item, i) => {
+                const textSpan = item.querySelector('span.text-sm');
+                if (i === index) {
+                    item.classList.add('bg-blue-500', 'text-white');
+                    item.classList.remove('text-gray-600', 'hover:bg-gray-100');
+                    textSpan.classList.add('font-semibold');
+                } else {
+                    item.classList.remove('bg-blue-500', 'text-white');
+                    item.classList.add('text-gray-600', 'hover:bg-gray-100');
+                    textSpan.classList.remove('font-semibold');
                 }
             });
-            
-            // Show explanation
-            document.getElementById('explanation-text').textContent = question.explanation;
-            document.getElementById('explanation-card').classList.remove('hidden');
-            document.getElementById('next-button-container').classList.remove('hidden');
+
+            // Close menu on mobile after selection
+            if (window.innerWidth < 768 && !sidebar.classList.contains('-translate-x-full')) {
+                toggleMenu();
+            }
+
+            // Scroll to top of content
+            contentArea.scrollTop = 0;
         }
 
-        function nextQuestion() {
-            currentQuizQuestion++;
-            loadQuizQuestion();
-        }
+        /**
+         * Initializes the application by populating the menu and loading the first module.
+         */
+        function initializeApp() {
+            // Populate menu
+            menuNav.innerHTML = modules.map((module, index) => `
+                <li>
+                    <a href="#" onclick="loadModule(${index}); event.preventDefault();" class="flex items-center p-3 text-gray-600 hover:bg-gray-100 transition-colors duration-200 rounded-md mx-2">
+                        <span class="mr-3 text-lg">${module.emoji}</span>
+                        <span class="text-sm font-medium">Módulo ${index + 1}: ${module.title.split(' ')[0]}...</span>
+                    </a>
+                </li>
+            `).join('');
 
-        function startTimer() {
-            timeLeft = 30;
-            document.getElementById('time-left').textContent = timeLeft;
-            document.getElementById('timer').classList.remove('warning');
-            
-            quizTimer = setInterval(() => {
-                timeLeft--;
-                document.getElementById('time-left').textContent = timeLeft;
-                
-                if (timeLeft <= 10) {
-                    document.getElementById('timer').classList.add('warning');
-                }
-                
-                if (timeLeft <= 0) {
-                    clearInterval(quizTimer);
-                    selectAnswer(-1); // Auto-select wrong answer
-                }
-            }, 1000);
+            // Load the first module
+            loadModule(0);
         }
+        
+        /**
+         * Checks the answer for the quiz.
+         * @param {HTMLElement} button - The button element that was clicked.
+         * @param {boolean} isCorrect - Whether the selected answer is correct.
+         */
+        function checkAnswer(button, isCorrect) {
+            const feedbackEl = document.getElementById('quiz-feedback');
+            if(!feedbackEl) return;
+            
+            const allButtons = document.querySelectorAll('#quiz-container button');
 
-        function endQuiz() {
-            document.getElementById('quiz-game').classList.add('hidden');
-            document.getElementById('quiz-results').classList.remove('hidden');
-            
-            const correctAnswers = quizAnswers.filter(a => a.isCorrect).length;
-            const percentage = Math.round((quizScore / (quizData.length * 20)) * 100);
-            
-            // Update results
-            document.getElementById('final-score').textContent = quizScore;
-            document.getElementById('final-percentage').textContent = `${percentage}%`;
-            document.getElementById('correct-answers').textContent = `${correctAnswers}/${quizData.length}`;
-            
-            // Update result message and icon
-            let message, icon;
-            if (percentage >= 90) {
-                message = "Excelente!";
-                icon = "🏆";
-            } else if (percentage >= 70) {
-                message = "Muito Bom!";
-                icon = "⭐";
-            } else if (percentage >= 50) {
-                message = "Bom!";
-                icon = "👍";
+            allButtons.forEach(btn => {
+                btn.disabled = true;
+                btn.classList.remove('hover:bg-gray-100');
+            });
+
+            if (isCorrect) {
+                button.classList.add('bg-green-500', 'text-white', 'border-green-500');
+                feedbackEl.textContent = 'Correto! A soberania de Deus é central.';
+                feedbackEl.className = 'mt-3 text-sm font-medium text-green-600';
             } else {
-                message = "Continue Estudando!";
-                icon = "📚";
+                button.classList.add('bg-red-500', 'text-white', 'border-red-500');
+                feedbackEl.textContent = 'Incorreto. A resposta certa é "Soberania de Deus".';
+                feedbackEl.className = 'mt-3 text-sm font-medium text-red-600';
             }
-            
-            document.getElementById('result-message').textContent = message;
-            document.getElementById('result-icon').textContent = icon;
         }
 
-        function resetQuiz() {
-            document.getElementById('quiz-results').classList.add('hidden');
-            document.getElementById('quiz-start').classList.remove('hidden');
-            
-            currentQuizQuestion = 0;
-            quizScore = 0;
-            quizAnswers = [];
-            quizStarted = false;
-            
-            document.getElementById('current-score').textContent = '0';
-        }
 
-        // Event Listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            // Navigation
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const section = this.getAttribute('data-section');
-                    showSection(section);
-                });
-            });
-            
-            // TOC
-            document.querySelectorAll('.toc-item').forEach(item => {
-                item.addEventListener('click', function() {
-                    const contentKey = this.getAttribute('data-content');
-                    loadContent(contentKey);
-                });
-            });
-            
-            // Flashcard filters
-            document.getElementById('flashcard-difficulty').addEventListener('change', filterFlashcards);
-            document.getElementById('flashcard-category').addEventListener('change', filterFlashcards);
-            
-            // Content search
-            document.getElementById('content-search').addEventListener('input', function() {
-                const searchTerm = this.value.toLowerCase();
-                // Implement search functionality here
-                console.log('Searching for:', searchTerm);
-            });
-            
-            // Initialize
-            showSection('home');
-        });
+        // --- EVENT LISTENERS ---
+        menuToggle.addEventListener('click', toggleMenu);
+        overlay.addEventListener('click', toggleMenu);
 
-        function filterFlashcards() {
-            const difficulty = document.getElementById('flashcard-difficulty').value;
-            const category = document.getElementById('flashcard-category').value;
-            
-            filteredFlashcards = flashcardsData.filter(card => {
-                const matchesDifficulty = !difficulty || card.difficulty === difficulty;
-                const matchesCategory = !category || card.category.toLowerCase().includes(category);
-                return matchesDifficulty && matchesCategory;
-            });
-            
-            currentFlashcard = 0;
-            updateFlashcard();
-        }
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', initializeApp);
     </script>
 </body>
 </html>
-
+�
